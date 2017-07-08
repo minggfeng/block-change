@@ -1,0 +1,8 @@
+#dependency directorys
+node_modules/
+
+.DS_Store
+
+public
+
+yarn.lock
