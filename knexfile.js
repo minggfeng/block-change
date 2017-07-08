@@ -2,8 +2,8 @@
 
 module.exports = {
 
+  client: 'postgresql',
   development: {
-    client: 'postgresql',
     connection: {
       database: 'block-change',
       user: 'postgres',
@@ -19,7 +19,6 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
     connection: {
       database: 'my_db',
       user:     'username',
@@ -32,7 +31,6 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
     connection: {
       database: 'my_db',
       user:     'username',
