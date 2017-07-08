@@ -9,17 +9,17 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTableIfNotExists('projects', function(table) {
       table.increments('id').unsigned().primary();
-      table.integer('profile_id').onDelete('CASCADE');
+      table.integer('profile_id');
       table.string('title');
       table.string('description');
       table.integer('goal');
-      table.image('string');
+      table.string('image');
     }),
     knex.schema.createTableIfNotExists('donations', function(table) {
       table.increments('id').unsigned().primary();
-      table.integer('profile_id').onDelete('CASCADE');
-      table.integer('project_id').onDelete('CASCADE');
-      table.strong('txhash');
+      table.integer('profile_id');
+      table.integer('project_id');
+      table.string('txhash');
     }),
   ])
 
