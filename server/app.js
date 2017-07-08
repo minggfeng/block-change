@@ -13,7 +13,7 @@ app.use(middleware.bodyParser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.status(200).sendFile('/index.html');
 })
 
 module.exports = app;
