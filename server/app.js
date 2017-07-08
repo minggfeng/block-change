@@ -10,10 +10,10 @@ app.use(middleware.morgan('dev'));
 app.use(middleware.bodyParser.urlencoded({ extended: false }));
 app.use(middleware.bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public/dist')));
 
-app.get('/', (req, res) => {
-  res.status(200).sendFile('/index.html');
-})
+app.get('/*', (req, res) => {
+  res.status(404).send(`Resource not found '${req.params.bad}'`);
+});
 
 module.exports = app;

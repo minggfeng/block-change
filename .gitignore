@@ -1,8 +1,8 @@
 #dependency directorys
 node_modules/
+public/dist
+package-lock.json
 
 .DS_Store
-
-public/dist/bundle.js
 
 yarn.lock

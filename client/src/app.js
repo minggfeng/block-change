@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -11,4 +11,4 @@ ReactDOM.render(
   (<Provider store={store}>
     <Landing />
   </Provider>),
-  document.getElementById('root'));
+  document.getElementById('app'));
