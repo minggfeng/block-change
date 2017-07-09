@@ -1,35 +1,12 @@
 const TestRPC = require('ethereumjs-testrpc');
-const Web3 = require('web3');
-
-// Replace with DB data
+const ethAddresses = require('./db/wallet_addresses');
 
 const PORT = 8545;
-const web3 = new Web3(new Web3.providers.HttpProvider(`http://localhost:${PORT}`));
 
-const accounts = [
-  { balance: 100, secretKey: 'hello' },
-  { balance: 200, secretKey: 'hello1' },
-  { balance: 10000, secretKey: 'hello2' },
-  { balance: 5000, secretKey: 'hello3' },
-  { balance: 1000, secretKey: 'hello4' },
-  { balance: 1000, secretKey: 'hello5' },
-  { balance: 1000, secretKey: 'hello6' },
-  { balance: 1000, secretKey: 'hello7' },
-  { balance: 1000, secretKey: 'hello8' },
-  { balance: 10000, secretKey: 'hello9' },
-];
-
-const newAccounts = accounts.map((obj) => {
-  const balance = web3.toWei(obj.balance, 'ether');
-  const secretKey = web3.sha3(obj.secretKey);
-  return { balance, secretKey };
-});
-
-// const server = TestRPC.server();
 const server = TestRPC.server({
-  accounts: newAccounts,
+  accounts: ethAddresses.userKeys,
   logger: console,
-  // db_path: './ethereum/db',
+  // db_path: './ethereum/data',
 });
 
 server.listen(PORT, (err, blockchain) => {
