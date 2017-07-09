@@ -67,7 +67,7 @@ class Landing extends Component {
           // style={styles.gridList}
         >
           {this.props.projects.map((project, i) => {
-            return (<ProjectSummary key={i} project={project} />);
+            return (<ProjectSummary index={i} key={i} project={project} />);
           })}
         </GridList>
         <div>
@@ -78,10 +78,6 @@ class Landing extends Component {
             loginActions={loginActions}
           />
         </div>
-
-        <li><Link to="project/1">Project</Link></li>
-        <li><Link to="createProject">Create a Project</Link></li>
-
       </div>
     );
   }

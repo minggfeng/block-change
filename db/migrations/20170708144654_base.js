@@ -20,7 +20,7 @@ exports.up = (knex, Promise) => Promise.all([
     table.integer('project_id').notNullable();
     table.string('txhash').notNullable();
   }),
-])
+]);
 
 exports.down = (knex, Promise) => Promise.all([
   knex.schema.dropTable('donations'),

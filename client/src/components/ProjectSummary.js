@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, RaisedButton } from 'material-ui';
+import { Link } from 'react-router-dom';
 
 class ProjectSummary extends Component {
 
@@ -9,8 +10,11 @@ class ProjectSummary extends Component {
       return (
         <div>
           <Card style={styles}>
-            <h3>{title}</h3> <br />
-            <i>description:{description}</i> <br />
+            <Link to={`/project/${this.props.index}`}>
+              <h3>{title}</h3> <br />
+              <i>description:{description}</i> 
+            </Link>
+              <br />
             <img src={image} alt={id} width={300} /> <br />
             <RaisedButton label="Donate" primary={true} />
             <RaisedButton label="Learn More" primary={true} />
