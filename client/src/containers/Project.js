@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import { toggleDonate, setProjectInFocus } from '../actions';
+import { toggleDonate, setProjectInFocus, setBalance, setProjectBalance } from '../actions';
 import HeaderPlain from '../components/HeaderPlain';
 import Donate from '../components/Donate';
 import {
@@ -30,6 +30,16 @@ class Project extends Component {
     };
     this.changeProp = this.changeProp.bind(this);
     this.getDonations = this.getDonations.bind(this);
+    this.openDonate = this.openDonate.bind(this);
+  }
+
+  openDonate() {
+    this.props.toggleDonate();
+    axios.get('/projects/getBalance/' + this.props.projects[this.props.index].project_wallet)
+    .then((res) => {
+      this.props.setBalance(res.data.balance);
+    })
+    .catch((err) => { console.log(err); });
   }
 
   changeProp(key, val) {
@@ -86,7 +96,7 @@ class Project extends Component {
               Goal: {goal}
             </div>
             <div style={{ padding: "10px" }}>
-              Amount Raised: 5000
+              Amount Raised: {this.props.projectBalance}
             </div>
             <div>
               Wallet address: {project_wallet}
@@ -97,7 +107,7 @@ class Project extends Component {
 
             <CardText>{description}</CardText>
 
-            <RaisedButton primary={true} style={style} label="Donate" onTouchTap={this.props.toggleDonate}/>
+            <RaisedButton primary={true} style={style} label="Donate" onTouchTap={this.openDonate}/>
 
             <Donate
               {...this.props}
@@ -131,12 +141,14 @@ const mapStateToProps = (state) => {
     showDonate: state.donate.showDonate,
     profile: state.profile,
     userWallet: state.profile.currentUserWallet,
+    balance: state.donate.balance,
+    projectBalance: state.donate.projectBalance,
   };
 };
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    toggleDonate, setProjectInFocus,
+    toggleDonate, setProjectInFocus, setBalance, setProjectBalance,
   }, dispatch);
 };
 

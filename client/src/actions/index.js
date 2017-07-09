@@ -127,3 +127,10 @@ export const setBalance = (balance) => {
     balance,
   };
 };
+
+export const setProjectBalance = (projectBalance) => {
+  return {
+    type: 'SET_PROJECT_BALANCE',
+    projectBalance,
+  };
+};
