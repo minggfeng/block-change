@@ -65,7 +65,12 @@ class Project extends Component {
 
             <CardText>{description}</CardText>
 
-            <RaisedButton label="Donate" primary={true} style={style} ></RaisedButton>
+            <RaisedButton primary={true} style={style} label="Donate" onTouchTap={this.props.toggleDonate}/>
+
+            <Donate
+              {...this.props}
+              project={this.props.projects[this.props.index]}
+            />
           </Card>
         </div>
       </div>
