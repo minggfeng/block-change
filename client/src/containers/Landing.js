@@ -75,11 +75,11 @@ class Landing extends Component {
       this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
       this.props.userLogin();
       this.props.resetUser();
-      // console.log('id: ', this.props.currentUser.currentUserId);
-      // console.log('email: ', this.props.currentUser.currentUserEmail);
-      // console.log('password: ', this.props.currentUser.currentUserPassword);
-      // console.log('wallet: ', this.props.currentUser.currentUserWallet);
-      // console.log('debit: ', this.props.currentUser.currentUserDebit);
+      console.log('id: ', this.props.currentUser.currentUserId);
+      console.log('email: ', this.props.currentUser.currentUserEmail);
+      console.log('password: ', this.props.currentUser.currentUserPassword);
+      console.log('wallet: ', this.props.currentUser.currentUserWallet);
+      console.log('debit: ', this.props.currentUser.currentUserDebit);
     })
     .catch( err => {
       console.error(`failed to validate login info: ${err}`);
@@ -101,11 +101,11 @@ class Landing extends Component {
     .then( res => {
       console.log(`successfully signed up`);
       this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
-      //  console.log('id: ', this.props.currentUser.currentUserId);
-      // console.log('email: ', this.props.currentUser.currentUserEmail);
-      // console.log('password: ', this.props.currentUser.currentUserPassword);
-      // console.log('wallet: ', this.props.currentUser.currentUserWallet);
-      // console.log('debit: ', this.props.currentUser.currentUserDebit);
+      console.log('id: ', this.props.currentUser.currentUserId);
+      console.log('email: ', this.props.currentUser.currentUserEmail);
+      console.log('password: ', this.props.currentUser.currentUserPassword);
+      console.log('wallet: ', this.props.currentUser.currentUserWallet);
+      console.log('debit: ', this.props.currentUser.currentUserDebit);
       this.props.userLogin();
       this.props.resetUser();
     });
