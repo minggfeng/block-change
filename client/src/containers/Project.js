@@ -8,7 +8,12 @@ import Donate from '../components/Donate';
 import axios from 'axios';
 import LinearProgress from 'material-ui/LinearProgress';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import {
+  Toolbar,
+  ToolbarGroup,
+  ToolbarTitle,
+  FlatButton } from 'material-ui';
+import { Redirect } from 'react-router-dom';
 
 const style = {
   margin: 12,
@@ -17,13 +22,30 @@ const style = {
 class Project extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      home: false
+    }
+    this.changeProp = this.changeProp.bind(this);
+  }
+
+  changeProp(key, val) {
+    this.setState({
+      [key]: val,
+    });
   }
 
   render() {
     const { id, title, description, goal, image } = this.props.projects[this.props.index];
+    if (this.state.home) {
+      return <Redirect to="/" />
+    }
     return (
       <div style={{width: "100%"}}>
-        <Header />
+        <Toolbar>
+          <ToolbarGroup>
+            <ToolbarTitle onClick={e => this.changeProp('home', !this.state.home)} text="Block Change" />
+          </ToolbarGroup>
+        </Toolbar>
         <div style={{margin: "auto", width: "65%", padding: "20px"}}>
           <Card>
             <CardMedia>
@@ -59,7 +81,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-<<<<<<< HEAD
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
     toggleDonate, setProjectInFocus,
@@ -67,6 +88,3 @@ const matchDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Project);
-=======
-export default connect(mapStateToProps)(Project);
->>>>>>> Css change for projects

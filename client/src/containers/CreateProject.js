@@ -6,12 +6,12 @@ import Header from '../components/Header';
 import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Redirect } from 'react-router-dom';
 import {
   Toolbar,
   ToolbarGroup,
   ToolbarTitle,
   FlatButton } from 'material-ui';
+import { Redirect } from 'react-router-dom';
 
 const style = {
   margin: 12,
@@ -28,6 +28,7 @@ class CreateProject extends Component {
         project_wallet: '',
         image: '',
         redirect: false,
+        home: false
       },
     };
 
@@ -66,6 +67,9 @@ class CreateProject extends Component {
   }
 
   render() {
+    if (this.state.home) {
+      return <Redirect to="/" />
+    }
     if (this.state.redirect) {
       return <Redirect to={`/project/${this.state.redirect}`}/>
     }
@@ -73,7 +77,7 @@ class CreateProject extends Component {
       <div style={{width: "100%"}}>
         <Toolbar>
           <ToolbarGroup>
-            <ToolbarTitle text="Block Change" />
+              <ToolbarTitle onClick={e => this.changeProp('home', !this.state.home)} text="Block Change" />
             <FlatButton label="Logout" primary={true} onTouchTap={() => console.log('clicked')}/>
           </ToolbarGroup>
         </Toolbar>
