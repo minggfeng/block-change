@@ -19,7 +19,7 @@ class ProjectSummary extends Component {
     return (
       <div>
         <Card style={styles}>
-          <h4>{title}</h4> 
+          <h4>{title}</h4>
           <i>description:{description}</i>
           <br />
           <img src={image} alt={id} width={300} /> <br />
