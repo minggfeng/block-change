@@ -14,13 +14,14 @@ class ProjectSummary extends Component {
   }
 
   render() {
-    const { id, title, description, image } = this.props.project;
+    const { id, title, description, image, project_wallet } = this.props.project;
     const context = this;
     return (
       <div>
         <Card style={styles}>
           <h4>{title}</h4>
           <i>description:{description}</i>
+          <i>wallet address:{project_wallet}</i>
           <br />
           <img src={image} alt={id} width={300} /> <br />
           <RaisedButton label="Donate" primary onTouchTap={this.openDonate} />

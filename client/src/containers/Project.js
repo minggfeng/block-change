@@ -35,7 +35,7 @@ class Project extends Component {
   }
 
   render() {
-    const { id, title, description, goal, image } = this.props.projects[this.props.index];
+    const { id, title, description, goal, image, project_wallet } = this.props.projects[this.props.index];
     if (this.state.home) {
       return <Redirect to="/" />
     }
@@ -54,6 +54,9 @@ class Project extends Component {
             </div>
             <div style={{ padding: "10px" }}>
               Amount Raised: 5000
+            </div>
+            <div>
+              Wallet address: {project_wallet}
             </div>
             <div style={{ padding: "10px" }}>
               <LinearProgress mode="determinate" value={(5000/goal) * 100} />

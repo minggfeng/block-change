@@ -46,16 +46,17 @@ class CreateProject extends Component {
     event.preventDefault();
 
     let options = {
-      profile_id: 1,
+      profile_id: this.props.currentUser.currentUserId,
       title: this.state.title,
       description: this.state.description,
       goal: this.state.goal,
-      project_wallet: this.state.project_wallet,
+      // project_wallet: this.state.project_wallet,
       image: this.state.image,
     };
-
+    
     axios.post('/projects/create', options)
     .then((results) => {
+      console.log('results: ', results);
       this.props.addProjects([results.data]);    
       this.setState({
         redirect: this.props.projects.length - 1,
@@ -86,9 +87,9 @@ class CreateProject extends Component {
           <div>
             <TextField style={{width: "100%"}} floatingLabelText="Goal" type="number" onChange={e => this.changeProp('goal', e.target.value)} />
           </div>
-          <div>
+          {/*<div>
             <TextField style={{width: "100%"}} floatingLabelText="Wallet Address" onChange={e => this.changeProp('project_wallet', e.target.value)} />
-          </div>
+          </div>*/}
           <div>
             <TextField style={{width: "100%"}} floatingLabelText="Image" onChange={e => this.changeProp('image', e.target.value)} />
           </div>
@@ -105,7 +106,8 @@ class CreateProject extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    projects: state.main.projects
+    projects: state.main.projects,
+    currentUser: state.profile,
   };
 };
 

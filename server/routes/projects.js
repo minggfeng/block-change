@@ -9,13 +9,19 @@ const db = require('../../db');
 
 router.route('/create')
 .post((req, res) => {
-  models.Project.forge(req.body).save()
-  .then((project) => {
-    res.status(201).send(project.serialize());
-  })
-  .catch((err) => {
-    console.log(err);
-    res.sendStatus(500);
+  console.log('req.body: create project: ', req.body);
+  models.Wallets.where({profile_id: -1}).fetch()
+  .then(wallet => {
+    req.body.project_wallet = wallet.attributes.wallet_address;
+    wallet.set({profile_id: req.body.profile_id}).save();
+    models.Project.forge(req.body).save()
+    .then((project) => {
+      res.status(201).send(project.serialize());
+    })
+    .catch((err) => {
+      console.log(err)
+      res.sendStatus(500);
+    });
   });
 });
 
