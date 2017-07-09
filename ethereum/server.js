@@ -14,6 +14,7 @@ server.listen(PORT, (err, blockchain) => {
     console.warn(err);
   } else {
     const accountsObj = blockchain.accounts;
+    console.log('** ETHEREUM STARTED **');
     for (const account in accountsObj) {
       console.log('------------');
       console.log('account: ', account);
