@@ -9,12 +9,15 @@ import {
   openSignupDialog,
   closeLoginDialog,
   closeSignupDialog,
+  setProjectInFocus,
+  toggleDonate,
 } from '../actions';
 import Header from '../components/Header';
 import Alert from '../components/Alert';
 import ProjectSummary from '../components/ProjectSummary';
 import LoginPage from '../components/LoginPage';
 import SignupPage from '../components/SignupPage';
+import Donate from '../components/Donate';
 import { Link } from 'react-router-dom';
 
 // styling
@@ -99,10 +102,13 @@ class Landing extends Component {
           // style={styles.gridList}
         >
           {this.props.projects.map((project, i) => {
-            return (<ProjectSummary index={i} key={i} project={project} />);
+            return (<ProjectSummary index={i} key={i} project={project}
+              setProjectInFocus={this.props.setProjectInFocus}
+              toggleDonate={this.props.toggleDonate}
+            />);
           })}
         </GridList>
-        <div>
+        {/* <div>
           <Alert
             openLogin={this.props.user.openLogin}
             openSignup={this.props.user.openSignup}
@@ -110,6 +116,14 @@ class Landing extends Component {
             loginActions={loginActions}
             signupActions={signupActions}
             validateLogin={this.validateLogin}
+          />
+        </div> */}
+        <div>
+          <Donate
+            project={this.props.projectInFocus}
+            toggleDonate={this.props.toggleDonate}
+            setProjectInFocus={this.props.setProjectInFocus}
+            showDonate={this.props.showDonate}
           />
         </div>
       </div>
@@ -121,12 +135,14 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     projects: state.main.projects,
+    projectInFocus: state.donate.projectInFocus,
+    showDonate: state.donate.showDonate,
   };
 };
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    openLoginDialog, closeLoginDialog, openSignupDialog, closeSignupDialog, saveProjects,
+    openLoginDialog, closeLoginDialog, openSignupDialog, closeSignupDialog, saveProjects, setProjectInFocus, toggleDonate,
   }, dispatch);
 }
 
