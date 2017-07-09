@@ -45,6 +45,8 @@ class Landing extends Component {
 
   closePopups() {
     this.props.resetUser();
+    this.props.closeLoginDialog();
+    this.props.closeSignupDialog();
   }
 
   componentDidMount() {
@@ -67,6 +69,7 @@ class Landing extends Component {
       // console.log('res: ', res);
       this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
       this.props.userLogin();
+      this.props.closeLoginDialog();
       this.props.resetUser();
       console.log('id: ', this.props.currentUser.currentUserId);
       console.log('email: ', this.props.currentUser.currentUserEmail);
@@ -100,8 +103,13 @@ class Landing extends Component {
       console.log('wallet: ', this.props.currentUser.currentUserWallet);
       console.log('debit: ', this.props.currentUser.currentUserDebit);
       this.props.userLogin();
+      this.props.closeSignupDialog();
       this.props.resetUser();
-    });
+    })
+    .catch( err => {
+      console.error(err);
+      this.props.userLogout();
+    })
   }
 
   loginToSignup() {
@@ -111,7 +119,7 @@ class Landing extends Component {
   }
 
   goToCreateProjectPage() {
-    window.location = '/';
+    // window.location = 'createProject';
   }
 
   render() {
@@ -149,7 +157,7 @@ class Landing extends Component {
       <div>
         <Header
           email={this.props.user.email}
-          goToCreateProjectPage={this.props.goToCreateProjectPage}
+          goToCreateProjectPage={this.goToCreateProjectPage}
           openLoginDialog={this.props.openLoginDialog}
           loggedin={this.props.user.loggedin}
           openLoginDialog={this.props.openLoginDialog}
