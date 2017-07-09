@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
 import { toggleDonate, setProjectInFocus } from '../actions';
-import Header from '../components/Header';
+import HeaderPlain from '../components/HeaderPlain';
 import Donate from '../components/Donate';
 import axios from 'axios';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -41,11 +41,7 @@ class Project extends Component {
     }
     return (
       <div style={{width: "100%"}}>
-        <Toolbar>
-          <ToolbarGroup>
-            <ToolbarTitle onClick={e => this.changeProp('home', !this.state.home)} text="Block Change" />
-          </ToolbarGroup>
-        </Toolbar>
+        <HeaderPlain />
         <div style={{margin: "auto", width: "65%", padding: "20px"}}>
           <Card>
             <CardMedia>
@@ -65,7 +61,12 @@ class Project extends Component {
 
             <CardText>{description}</CardText>
 
-            <RaisedButton label="Donate" primary={true} style={style} ></RaisedButton>
+            <RaisedButton primary={true} style={style} label="Donate" onTouchTap={this.props.toggleDonate}/>
+
+            <Donate
+              {...this.props}
+              project={this.props.projects[this.props.index]}
+            />
           </Card>
         </div>
       </div>

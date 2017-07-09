@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addProjects } from '../actions';
-import Header from '../components/Header';
+import HeaderPlain from '../components/HeaderPlain';
 import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -75,12 +75,7 @@ class CreateProject extends Component {
     }
     return (
       <div style={{width: "100%"}}>
-        <Toolbar>
-          <ToolbarGroup>
-              <ToolbarTitle onClick={e => this.changeProp('home', !this.state.home)} text="Block Change" />
-            <FlatButton label="Logout" primary={true} onTouchTap={() => console.log('clicked')}/>
-          </ToolbarGroup>
-        </Toolbar>
+        <HeaderPlain />
         <div style={{ margin: "auto", width: "50%"}}>
           <div>
             <TextField style={{width: "100%"}} floatingLabelText="Title" onChange={e => this.changeProp('title', e.target.value)} />
