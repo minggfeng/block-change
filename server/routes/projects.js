@@ -14,7 +14,7 @@ router.route('/create')
     res.status(201).send(project.serialize());
   })
   .catch((err) => {
-    console.log(err)
+    console.log(err);
     res.sendStatus(500);
   });
 });
@@ -31,12 +31,12 @@ router.route('/fetchProjects')
 router.route('/getBalance/:address')
 .get((req, res) => {
   return new Promise((resolve, reject) => {
-    resolve(helpers.balance(req.params.address));
+    resolve(helpers.getBalance(req.params.address));
   })
-  .then((data) => {
-    res.status(200).send({ balance: data });
-  })
-  .catch((err) => { console.log(err); })
+    .then((data) => {
+      res.status(200).send({ balance: data });
+    })
+    .catch((err) => { console.log(err); });
 });
 
 router.route('/sendTransaction')
@@ -51,17 +51,16 @@ router.route('/sendTransaction')
   .catch((err) => { console.log(err); });
 });
 
-//0xc960015f7ba0029847dab2c6213528d5eb1861721f897a8141c822b9de6db1bb
+// 0xc960015f7ba0029847dab2c6213528d5eb1861721f897a8141c822b9de6db1bb
 router.route('/getTransaction/:txHash')
 .get((req, res) => {
   return new Promise((resolve, reject) => {
     resolve(helpers.getTransaction(req.params.txHash));
   })
   .then((data) => {
-    res.status(200).send({data: data});
+    res.status(200).send({ data });
   })
   .catch((err) => { console.log(err); });
 });
-
 
 module.exports = router;
