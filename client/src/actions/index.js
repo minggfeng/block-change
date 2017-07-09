@@ -113,3 +113,11 @@ export const updateCurrentUser = (userId, password, email, wallet, debit) => {
     debit,
   };
 };
+
+export const addProjects = (newProjects) => {
+  return {
+    type: 'ADD_PROJECTS',
+    newProjects,
+  };
+};
+

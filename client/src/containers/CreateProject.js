@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import actions from '../actions';
+import { addProjects } from '../actions';
 import Header from '../components/Header';
 import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import Alert from '../components/Alert';
+import {
+  Toolbar,
+  ToolbarGroup,
+  ToolbarTitle,
+  FlatButton } from 'material-ui';
+import { Redirect } from 'react-router-dom';
 
 const style = {
   margin: 12,
@@ -22,9 +27,9 @@ class CreateProject extends Component {
         goal: '',
         project_wallet: '',
         image: '',
-        alert: false,
-        alertMessage: ''
-      }
+        redirect: false,
+        home: false
+      },
     };
 
     this.changeProp = this.changeProp.bind(this);
@@ -33,7 +38,7 @@ class CreateProject extends Component {
 
   changeProp(key, val) {
     this.setState({
-      [key]: val
+      [key]: val,
     });
   }
 
@@ -46,58 +51,73 @@ class CreateProject extends Component {
       description: this.state.description,
       goal: this.state.goal,
       project_wallet: this.state.project_wallet,
-      image: this.state.image
+      image: this.state.image,
     };
 
     axios.post('/projects/create', options)
-    .then(results => {
+    .then((results) => {
+      this.props.addProjects([results.data]);    
       this.setState({
-        alertTitle: 'Project Created'
+        redirect: this.props.projects.length - 1,
       });
     })
     .catch(err => {
-      this.setState({
-        alertTitle: 'Error in creating project. Please try again.'
-      });
+      console.log(err);
     });
-
   }
 
   render() {
+    if (this.state.home) {
+      return <Redirect to="/" />
+    }
+    if (this.state.redirect) {
+      return <Redirect to={`/project/${this.state.redirect}`}/>
+    }
     return (
-      <div>
-        {
-          this.state.alert && 
-          <Alert title={this.state.alertTitle} open={this.state.alert} />
-        }
-        <Header />
+      <div style={{width: "100%"}}>
+        <Toolbar>
+          <ToolbarGroup>
+              <ToolbarTitle onClick={e => this.changeProp('home', !this.state.home)} text="Block Change" />
+            <FlatButton label="Logout" primary={true} onTouchTap={() => console.log('clicked')}/>
+          </ToolbarGroup>
+        </Toolbar>
+        <div style={{ margin: "auto", width: "50%"}}>
           <div>
-            <TextField floatingLabelText="Title" onChange={e => this.changeProp('title', e.target.value)} />
+            <TextField style={{width: "100%"}} floatingLabelText="Title" onChange={e => this.changeProp('title', e.target.value)} />
           </div>
           <div>
-            <TextField floatingLabelText="Description" multiLine={true} rows={5} rowsMax={5} onChange={e => this.changeProp('description', e.target.value)} />
+            <TextField style={{width: "100%"}} floatingLabelText="Description" multiLine={true} rows={5} rowsMax={5} onChange={e => this.changeProp('description', e.target.value)} />
           </div>
           <div>
-            <TextField floatingLabelText="Goal" type="number" onChange={e => this.changeProp('goal', e.target.value)} />
+            <TextField style={{width: "100%"}} floatingLabelText="Goal" type="number" onChange={e => this.changeProp('goal', e.target.value)} />
           </div>
           <div>
-            <TextField floatingLabelText="Wallet Address" onChange={e => this.changeProp('project_wallet', e.target.value)} />
+            <TextField style={{width: "100%"}} floatingLabelText="Wallet Address" onChange={e => this.changeProp('project_wallet', e.target.value)} />
           </div>
-          <RaisedButton onTouchTap={e => {this.createProject(e)}} label="Create Project" primary={true} style={style} />
+          <div>
+            <TextField style={{width: "100%"}} floatingLabelText="Image" onChange={e => this.changeProp('image', e.target.value)} />
+          </div>
+          <div>
+            <RaisedButton onTouchTap={e => {this.createProject(e)}} label="Create Project" primary={true} style={style} />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
+
 const mapStateToProps = (state) => {
   return {
-    sampleReducer: state.sampleReducer,
+    user: state.user,
+    projects: state.main.projects
   };
 };
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-  });
-}
+    addProjects,
+  }, dispatch);
+};
 
 export default connect(mapStateToProps, matchDispatchToProps)(CreateProject);
