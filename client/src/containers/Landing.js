@@ -18,7 +18,7 @@ import SignupPage from '../components/SignupPage';
 import { Link } from 'react-router-dom';
 
 // styling
-import RaisedButton from 'material-ui/RaisedButton';
+import { GridList, RaisedButton } from 'material-ui';
 import './css/Landing.css';
 
 // Needed for onTouchTap
@@ -61,9 +61,15 @@ class Landing extends Component {
     return (
       <div>
         <Header />
-        {this.props.projects.map((project, i) => {
-          return (<ProjectSummary key={i} project={project} />);
-        })}
+        <GridList
+          cellHeight={400}
+          cols={3}
+          // style={styles.gridList}
+        >
+          {this.props.projects.map((project, i) => {
+            return (<ProjectSummary key={i} project={project} />);
+          })}
+        </GridList>
         <div>
           <Alert
             openLogin={this.props.user.openLogin}
