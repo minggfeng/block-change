@@ -6,14 +6,6 @@ const Web3 = require('web3');
 const PORT = 8545;
 const web3 = new Web3(new Web3.providers.HttpProvider(`http://localhost:${PORT}`));
 
-const hexToBytes = (hex) => {
-  const bytes = [];
-  for (let c = 0; c < hex.length; c += 2) {
-    bytes.push(parseInt(hex.substr(c, 2), 16));
-  }
-  return bytes;
-};
-
 const accounts = [
   { balance: 100, secretKey: 'hello' },
   { balance: 200, secretKey: 'hello1' },

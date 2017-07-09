@@ -6,7 +6,10 @@
     "start:wds": "webpack-dev-server --inline --hot",
     "ethereum": "nodemon ethereum/server.js",
     "build": "webpack --watch",
-    "build:prod": "webpack -p"
+    "build:prod": "webpack -p",
+    "db": "pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start",
+    "db:stop": "pg_ctl -D /usr/local/var/postgres stop -s -m fast",
+    "db:seed": "knex seed:run"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -15,6 +18,7 @@
     "config": "^1.26.1",
     "css-loader": "^0.28.4",
     "ethereumjs-testrpc": "^4.0.1",
+    "ethereumjs-util": "^5.1.2",
     "express": "^4.15.3",
     "knex": "^0.13.0",
     "material-ui": "^0.18.6",
