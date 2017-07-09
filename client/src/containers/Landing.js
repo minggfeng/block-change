@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import actions from '../actions';
+import {
+  openLoginDialog,
+  openSignupDialog,
+  closeLoginDialog,
+  closeSignupDialog,
+} from '../actions';
 import Header from '../components/Header';
 import Alert from '../components/Alert';
 import ProjectSummary from '../components/ProjectSummary';
@@ -30,7 +35,7 @@ class Landing extends Component {
   }
 
   render() {
-    const dialogActions = [
+    const loginActions = [
       <RaisedButton
         label="Okay"
         primary
@@ -53,8 +58,11 @@ class Landing extends Component {
 
         <div>
           <Alert
+            openLogin={this.props.user.openLogin}
+            openSignup={this.props.user.openSignup}
             handle={this.testDialog}
-            dialogActions={dialogActions}
+            loginActions={loginActions}
+
           />
         </div>
       </div>
@@ -64,13 +72,18 @@ class Landing extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    sampleReducer: state.sampleReducer,
+    user: state.user,
+    main: state.main,
   };
 };
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-  });
+    openLoginDialog: openLoginDialog,
+    closeLoginDialog: closeLoginDialog,
+    openSignupDialog: openSignupDialog,
+    closeSignupDialog: closeSignupDialog,
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Landing);
