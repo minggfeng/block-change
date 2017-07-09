@@ -69,4 +69,15 @@ router.route('/getTransaction/:txHash')
   .catch((err) => { console.log(err); });
 });
 
+router.route('/getDonations')
+.post((req, res) => {
+  models.Donation.where({ project_id: req.body.project_id }).fetchAll()
+  .then((project) => {
+    res.status(201).send(project.serialize().map(x => x.txhash));
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  });
+});
+
 module.exports = router;

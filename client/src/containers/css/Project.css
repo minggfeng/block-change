@@ -1,0 +1,17 @@
+.tx-table {
+  margin: 5px;
+  padding: 2px;
+}
+
+.tx-header {
+  font-weight: bold;
+}
+
+.tx-td {
+  font-size: 0.8rem;
+}
+
+.tx-td:hover {
+  color: blue;
+  font-weight: bold;
+}
