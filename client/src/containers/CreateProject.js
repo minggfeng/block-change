@@ -50,20 +50,21 @@ class CreateProject extends Component {
       title: this.state.title,
       description: this.state.description,
       goal: this.state.goal,
-      // project_wallet: this.state.project_wallet,
       image: this.state.image,
     };
     
     axios.post('/projects/create', options)
     .then((results) => {
-      console.log('results: ', results);
       this.props.addProjects([results.data]);    
       this.setState({
         redirect: this.props.projects.length - 1,
       });
     })
     .catch(err => {
-      console.log(err);
+      this.props.addProjects([results.data]);    
+      this.setState({
+        redirect: this.props.projects.length - 1,
+      });
     });
   }
 
@@ -87,9 +88,6 @@ class CreateProject extends Component {
           <div>
             <TextField style={{width: "100%"}} floatingLabelText="Goal" type="number" onChange={e => this.changeProp('goal', e.target.value)} />
           </div>
-          {/*<div>
-            <TextField style={{width: "100%"}} floatingLabelText="Wallet Address" onChange={e => this.changeProp('project_wallet', e.target.value)} />
-          </div>*/}
           <div>
             <TextField style={{width: "100%"}} floatingLabelText="Image" onChange={e => this.changeProp('image', e.target.value)} />
           </div>
