@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card, RaisedButton } from 'material-ui';
 
 class ProjectSummary extends Component {
 
@@ -7,9 +8,13 @@ class ProjectSummary extends Component {
       const { id, title, description, image } = this.props.project;
       return (
         <div>
-          <b>{title}</b> <br />
-          description:{description} <br />
-          <img src={image} alt={id} width={100} />
+          <Card style={styles}>
+            <h3>{title}</h3> <br />
+            <i>description:{description}</i> <br />
+            <img src={image} alt={id} width={300} /> <br />
+            <RaisedButton label="Donate" primary={true} />
+            <RaisedButton label="Learn More" primary={true} />
+          </Card>
         </div>
       );
     } else {
@@ -17,5 +22,11 @@ class ProjectSummary extends Component {
     }
   }
 }
+
+const styles = {
+  width: 380,
+  padding: 15,
+  margin: 10,
+};
 
 export default ProjectSummary;
