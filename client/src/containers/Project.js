@@ -120,7 +120,7 @@ class Project extends Component {
               Wallet address: {project_wallet}
             </div>
             <div style={{ padding: "10px" }}>
-              <LinearProgress mode="determinate" value={(5000/goal) * 100} />
+              <LinearProgress mode="determinate" value={(this.props.projectBalance/goal) * 100} />
             </div>
 
             <CardText>{description}</CardText>
