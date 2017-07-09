@@ -55,7 +55,7 @@ class Landing extends Component {
   }
 
   componentDidMount() {
-    axios.get('/fetchProjects')
+    axios.get('/projects/fetchProjects')
     .then((res) => {
       this.props.saveProjects(res.data);
     })
