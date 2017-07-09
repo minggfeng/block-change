@@ -63,15 +63,16 @@ class Landing extends Component {
   }
 
   validateLogin() {
-    console.log('email: ', this.props.user.email);
-    console.log('password: ', this.props.user.password);
-    axios.post('/user/login', {
-      email: this.props.user.email,
-      password: this.props.user.password
+    // console.log('email: ', this.props.user.email);
+    // console.log('password: ', this.props.user.password);
+    axios.post('/user/login', { 
+      email: this.props.user.email, 
+      password: this.props.user.password 
     })
     .then( res => {
       console.log(`successfully validated login info`);
-      this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.wallet, res.data.debit)
+      // console.log('res: ', res);
+      this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
       this.props.userLogin();
       this.props.resetUser();
       console.log('id: ', this.props.currentUser.currentUserId);
@@ -87,10 +88,11 @@ class Landing extends Component {
   }
 
   proceedSignup() {
-    console.log('email: ', this.props.currentUser.email);
-    console.log('password: ', this.props.currentUser.password);
-    console.log('wallet: ', this.props.currentUser.wallet);
-    console.log('debit: ', this.props.currentUser.debit);
+      // console.log('id: ', this.props.currentUser.currentUserId);
+      // console.log('email: ', this.props.currentUser.currentUserEmail);
+      // console.log('password: ', this.props.currentUser.currentUserPassword);
+      // console.log('wallet: ', this.props.currentUser.currentUserWallet);
+      // console.log('debit: ', this.props.currentUser.currentUserDebit);
     axios.post('/user/signup', { email: this.props.user.email,
       password: this.props.user.password,
       profile_wallet: this.props.user.wallet,
@@ -98,7 +100,12 @@ class Landing extends Component {
     })
     .then( res => {
       console.log(`successfully signed up`);
-      this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.wallet, res.data.debit)
+      this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
+      console.log('id: ', this.props.currentUser.currentUserId);
+      console.log('email: ', this.props.currentUser.currentUserEmail);
+      console.log('password: ', this.props.currentUser.currentUserPassword);
+      console.log('wallet: ', this.props.currentUser.currentUserWallet);
+      console.log('debit: ', this.props.currentUser.currentUserDebit);
       this.props.userLogin();
       this.props.resetUser();
     });
