@@ -30,8 +30,8 @@ exports.seed = (knex, Promise) => knex('user_wallets').del()
         id: index,
         profile_id: index + 1,
         title: projects[index % projects.length].title,
-        description: projects[index % projects.length].description,
-        goal: 10000 * (Math.random() * 10 | 0),
+        description: projects[index % projects.length].description.substr(0, 255),
+        goal: projects[index % projects.length].goal,
         project_wallet: x.wallet_address,
         image: projects[index % projects.length].image,
       });

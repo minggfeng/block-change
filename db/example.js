@@ -1,4 +1,4 @@
-const projects = [
+module.exports = [
   { 
     title: "The Fight for Women's Health",
     description: "Over the past 15 years, the number of women dying due to pregnancy-related causes has dropped significantly worldwide. This is wonderful news. But in many of the countries where Doctors Without Borders/ Médecins Sans Frontières (MSF) works, a shocking number of women still die preventable deaths. Some 800 women die every day due to pregnancy-related causes, the vast majority in developing countries, because they could not get the care they needed. MSF has projects in some 70 countries around the world. Most of our patients are women and children, and many of our waiting rooms and wards are full of pregnant women, women who are injured or ill, and women seeking care for their children. Our staff sees mothers walk great distances in dangerous circumstances to make sure their children get vaccinations and treatment, and risk everything, including rejection by their husbands, to prevent transmitting HIV to their unborn babies. These are remarkably strong women and they are anything but victims. Yet in spite of the huge burdens they shoulder, they rarely possess the power to decide when they themselves can get lifesaving care. These issues and the suffering they cause are not new or unknown, yet they still have not been adequately addressed. MSF has demonstrated that it doesn’t have to be this way; that simple, inexpensive interventions carried out by trained health staff can save many of these women.",
@@ -10,7 +10,6 @@ const projects = [
     description: "Intercommunal fighting in the province of Tanganyika, in the Democratic Republic of Congo, has displaced nearly half a million people since July 2016. Many of them are living in informal settlements with limited access to health care and alarming shortages of food and water. Doctors Without Borders/Médecins Sans Frontières (MSF) is providing a range of humanitarian aid, including medical care and water, but more aid is needed.",
     goal: Math.floor(Math.random() * 200000),
     image: "https://www.doctorswithoutborders.org/sites/usa/files/styles/wysiwyg_full_width/public/msf197608_medium.jpg?itok=ytuCD8Wz",
-    due_date: tomorrow(),
     organization_id: 1
   },
   {
@@ -108,7 +107,6 @@ const projects = [
     description: "When Breanne told her family she was expecting her first child, she was met with shock and disappointment. She was only 15 years old at the time. Her small town community didn’t embrace her either. “Going to school pregnant made me an outcast. You have to grow up fast because you’re responsible for a little life,” she says. Her commitment to her children, however, is unwavering. She’s doing the best for her kids and her youngest children, Jesse and Serenity, who participate in Save the Children’s early childhood education programs. “Kids living in poverty can’t really even be kids because they see drugs, drinking and guns. It steals their childhood. When you grow up poor, you have to deal with the tough reality of life before you’re ready. I work hard every day to make things better for my kids than it was for me,” Breanne shares. “In the end, it’s worth it because you have your baby. Feeling that love makes everything better.”",
     goal: Math.floor(Math.random() * 200000),
     image: "http://www.savethechildren.org/atf/cf/%7B9def2ebe-10ae-432c-9bd0-df91d2eba74a%7D/JUNE17_CHILDHOODINDEX_ASSET5.JPG",
-    due_date: dateString(),
   },
   {
     title: "Global Reach",
