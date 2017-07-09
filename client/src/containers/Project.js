@@ -84,7 +84,7 @@ class Project extends Component {
     const { id } = this.props.projects[this.props.index];
     this.getDonations(id);
   }
-  
+
   render() {
     const { id, title, description, goal, image, project_wallet } = this.props.projects[this.props.index];
     if (this.state.home) {
@@ -142,6 +142,8 @@ const mapStateToProps = (state) => {
     user: state.user,
     projects: state.main.projects,
     showDonate: state.donate.showDonate,
+    profile: state.profile,
+    userWallet: state.profile.currentUserWallet,
   };
 };
 

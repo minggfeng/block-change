@@ -106,7 +106,7 @@ export const userLogout = () => {
 export const updateCurrentUser = (userId, password, email, wallet, debit) => {
   return {
     type: 'UPDATE_CURRENT_USER',
-    userId, 
+    userId,
     password,
     email,
     wallet,
@@ -121,3 +121,9 @@ export const addProjects = (newProjects) => {
   };
 };
 
+export const setBalance = (balance) => {
+  return {
+    type: 'SET_BALANCE',
+    balance,
+  };
+};
