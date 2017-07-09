@@ -34,7 +34,11 @@ const newAccounts = accounts.map((obj) => {
 });
 
 // const server = TestRPC.server();
-const server = TestRPC.server({ accounts: newAccounts });
+const server = TestRPC.server({
+  accounts: newAccounts,
+  logger: console,
+  db_path: './ethereum/db',
+});
 
 server.listen(PORT, (err, blockchain) => {
   if (err) {
