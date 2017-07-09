@@ -64,9 +64,6 @@ class Landing extends Component {
     .catch( err => { console.error(`failed to validate login info: ${err}`); })
   }
 
-
-
-
   render() {
     const loginActions = [
       <RaisedButton

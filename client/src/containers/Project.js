@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { RaisedButton } from 'material-ui';
 import actions from '../actions';
 import Header from '../components/Header';
 import axios from 'axios';
@@ -15,15 +16,12 @@ class Project extends Component {
     return (
       <div>
         <Header />
-        
         <h1>{title}</h1>
-
-        <p>{description}</p>
-
+        <img src={image} alt={id} width={500}/>
+        <p><b>Description:</b> {description}</p>
+        <div>Amount Raised: {goal}</div>
         <div>Goal: {goal}</div>
-
-        <button>Donate</button>
-
+        <RaisedButton label="Donate" />
       </div>
     );
   }
