@@ -61,7 +61,7 @@ class Project extends Component {
       }),
     };
 
-    fetch('/projects/getDonations', options)
+    fetch('/projects/getTxDonations', options)
       .then(res => res.json())
       .then((res) => {
         console.log(res);

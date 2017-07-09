@@ -74,19 +74,7 @@ router.route('/getDonations')
 .post((req, res) => {
   models.Donation.where({ project_id: req.body.project_id }).fetchAll()
   .then((project) => {
-    return Promise.map(project.serialize(), x => {
-      return new Promise((resolve, reject) => {
-        resolve(helpers.getTransaction(x.txhash));
-      })
-      .then(transaction => {
-
-        console.log('transcation', transaction)
-      })
-    })
-    // res.status(201).send(project.serialize().map(x => x.txhash));
-  })
-  .then(mapped => {
-    console.log('mapped', mapped)
+    res.status(201).send(project.serialize().map(x => x.txhash));
   })
   .catch((err) => {
     res.status(500).send(err);
@@ -97,7 +85,6 @@ router.route('/getTxDonations')
 .post((req, res) => {
   models.Donation.where({ project_id: req.body.project_id }).fetchAll()
     .then((project) => {
-      console.log(project.serialize());
     res.status(201).send(project.serialize().map(x => helpers.getTransaction(x.txhash)));
   })
   .catch((err) => {
