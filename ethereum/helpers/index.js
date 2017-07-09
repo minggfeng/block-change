@@ -1,11 +1,11 @@
-const Web3 = require('web3');
 
+const Web3 = require('web3');
+const EthTx = require('ethereumjs-tx');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-const mintWallet = require('../db/wallet_addresses').mintWallet;
 
 /* addr is wallet address*/
 
-const getBalance = addr => web3.fromWei(web3.eth.getBalance(addr), 'ether').toNumber();
+const balance = addr => web3.fromWei(web3.eth.getBalance(addr), 'ether').toNumber();
 
 const sendTransaction = (amount, addr1, addr2) => web3.eth.sendTransaction({
   from: addr1,
@@ -19,12 +19,9 @@ const getTransaction = txHash => web3.eth.getTransaction(txHash);
 
 const getTransactionCount = addr => web3.eth.getTransactionCount(addr);
 
-const transferFromMint = (amount, addr) => sendTransaction(amount, mintWallet, addr);
-
 module.exports = {
-  getBalance,
+  balance,
   sendTransaction,
   getTransaction,
   getTransactionCount,
-  transferFromMint,
 };

@@ -65,9 +65,9 @@ class Landing extends Component {
   validateLogin() {
     console.log('email: ', this.props.user.email);
     console.log('password: ', this.props.user.password);
-    axios.post('/user/login', { 
-      email: this.props.user.email, 
-      password: this.props.user.password 
+    axios.post('/user/login', {
+      email: this.props.user.email,
+      password: this.props.user.password
     })
     .then( res => {
       console.log(`successfully validated login info`);
@@ -80,7 +80,7 @@ class Landing extends Component {
       console.log('wallet: ', this.props.currentUser.currentUserWallet);
       console.log('debit: ', this.props.currentUser.currentUserDebit);
     })
-    .catch( err => { 
+    .catch( err => {
       console.error(`failed to validate login info: ${err}`);
       this.props.userLogout();
     });
@@ -144,7 +144,7 @@ class Landing extends Component {
     ];
     return (
       <div>
-        <Header 
+        <Header
           openLoginDialog={this.props.openLoginDialog}
           openSignupDialog={this.props.openSignupDialog}
         />
@@ -160,7 +160,7 @@ class Landing extends Component {
             />);
           })}
         </GridList>
-        {/* <div>
+        <div>
           <Alert
             openLogin={this.props.user.openLogin}
             openSignup={this.props.user.openSignup}
@@ -169,7 +169,7 @@ class Landing extends Component {
             signupActions={signupActions}
             validateLogin={this.validateLogin}
           />
-        </div> */}
+        </div>
         <div>
           <Donate
             project={this.props.projectInFocus}
