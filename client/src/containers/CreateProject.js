@@ -53,11 +53,10 @@ class CreateProject extends Component {
       // project_wallet: this.state.project_wallet,
       image: this.state.image,
     };
-    
+
     axios.post('/projects/create', options)
     .then((results) => {
-      console.log('results: ', results);
-      this.props.addProjects([results.data]);    
+      this.props.addProjects([results.data]);
       this.setState({
         redirect: this.props.projects.length - 1,
       });
@@ -78,6 +77,7 @@ class CreateProject extends Component {
       <div style={{width: "100%"}}>
         <HeaderPlain />
         <div style={{ margin: "auto", width: "50%"}}>
+          <h2>Create Project</h2>
           <div>
             <TextField style={{width: "100%"}} floatingLabelText="Title" onChange={e => this.changeProp('title', e.target.value)} />
           </div>
@@ -94,7 +94,7 @@ class CreateProject extends Component {
             <TextField style={{width: "100%"}} floatingLabelText="Image" onChange={e => this.changeProp('image', e.target.value)} />
           </div>
           <div>
-            <RaisedButton onTouchTap={e => {this.createProject(e)}} label="Create Project" primary={true} style={style} />
+            <RaisedButton onTouchTap={e => {this.createProject(e)}} label="Submit" primary={true} style={style} />
           </div>
         </div>
       </div>

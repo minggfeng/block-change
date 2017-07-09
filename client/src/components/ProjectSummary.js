@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Card, RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { setBalance } from '../actions';
 
 class ProjectSummary extends Component {
   constructor(props) {
@@ -14,6 +18,12 @@ class ProjectSummary extends Component {
   openDonate() {
     this.props.toggleDonate();
     this.props.setProjectInFocus(this.props.project);
+    const context = this;
+    axios.get('/projects/getBalance/' + this.props.userWallet)
+    .then((res) => {
+      context.props.setBalance(res.data.balance);
+    })
+    .catch((err) => { console.log(err); });
   }
 
   render() {
@@ -50,4 +60,16 @@ const styles = {
   alignItems: 'center',
 };
 
-export default ProjectSummary;
+const mapStateToProps = (state) => {
+  return {
+    balance: state.donate.balance,
+  };
+};
+
+const matchDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    setBalance,
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, matchDispatchToProps)(ProjectSummary);

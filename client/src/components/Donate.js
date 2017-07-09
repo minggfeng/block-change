@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import axios from 'axios';
 import { Dialog, TextField, FlatButton } from 'material-ui';
 
 class Donate extends Component {
@@ -8,6 +7,7 @@ class Donate extends Component {
     super(props);
     this.state = {
       amount: 0,
+      balance: '',
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -25,6 +25,14 @@ class Donate extends Component {
   }
 
   sendDonation() {
+    const params = {
+      fromAddress: this.props.userWallet,
+      //toAddress: this.props.project.,
+      amount: this.state.amount,
+    };
+    axios.post('/projects/sendTransaction', params)
+    .catch((err) => { console.log(err); })
+
     console.log('sending donation');
   }
 
@@ -51,7 +59,7 @@ class Donate extends Component {
           open={this.props.showDonate}
           onRequestClose={this.handleClose}
         >
-          <div>Your Balance: {3} </div>
+          <div>Your Balance: {this.props.balance} </div>
           <TextField floatingLabelText="Amount" type="number" onChange={this.handleChange} value={this.state.amount}/>
         </Dialog>
       </div>
