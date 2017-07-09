@@ -6,5 +6,5 @@ const db = require('../db');
 const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {
-  console.log('block-change listenting on port 9000!');
+  console.log('block-change listening on port 9000!');
 });
