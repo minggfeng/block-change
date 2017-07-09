@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import axios from 'axios';
 import {
@@ -22,7 +23,8 @@ import ProjectSummary from '../components/ProjectSummary';
 import LoginPage from '../components/LoginPage';
 import SignupPage from '../components/SignupPage';
 import Donate from '../components/Donate';
-import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
+
 
 // styling
 import { GridList, RaisedButton } from 'material-ui';
@@ -66,6 +68,7 @@ class Landing extends Component {
     })
     .then( res => {
       console.log(`successfully validated login info`);
+      alert(`successfully validated login info`);
       // console.log('res: ', res);
       this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
       this.props.userLogin();
@@ -96,6 +99,8 @@ class Landing extends Component {
     })
     .then( res => {
       console.log(`successfully signed up`);
+      alert(`successfully signed up`);
+
       this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
       console.log('id: ', this.props.currentUser.currentUserId);
       console.log('email: ', this.props.currentUser.currentUserEmail);
@@ -124,16 +129,16 @@ class Landing extends Component {
 
   render() {
     const loginActions = [
-      <RaisedButton
+      <span style={{ marginRight: 20 }}><RaisedButton
         label="Log in"
-        secondary
+        primary
         onTouchTap={this.validateLogin}
-      />,
-      <RaisedButton
+      /></span>,
+      <span style={{ marginRight: 20 }}><RaisedButton
         label="Sign up"
         primary
         onTouchTap={this.loginToSignup}
-      />,
+      /></span>,
       <RaisedButton
         label="Cancel"
         primary
@@ -142,11 +147,11 @@ class Landing extends Component {
     ];
 
     const signupActions = [
-      <RaisedButton
+      <span style={{ marginRight: 20 }}><RaisedButton
         label="Sign up"
-        secondary
+        primary
         onTouchTap={this.proceedSignup}
-      />,
+      /></span>,
       <RaisedButton
         label="Cancel"
         primary
@@ -196,6 +201,7 @@ class Landing extends Component {
             balance={this.props.balance}
           />
         </div>
+        <Footer />
       </div>
     );
   }

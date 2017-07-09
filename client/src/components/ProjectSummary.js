@@ -53,7 +53,6 @@ class ProjectSummary extends Component {
       <div>
         <Card style={styles}>
           <h4>{title}</h4>
-          <br />
           <div style={{ margin: 20 }}>
             <img src={image} alt={id} width={300} /> <br />
           </div>
