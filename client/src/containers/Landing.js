@@ -39,9 +39,7 @@ class Landing extends Component {
   componentDidMount() {
     axios.get('/fetchProjects')
     .then((res) => {
-      console.log('res.data', res.data);
       this.props.saveProjects(res.data);
-      console.log('?', this.props.projects);
     })
     .catch((err) => { console.log(err); });
   }
@@ -62,8 +60,8 @@ class Landing extends Component {
     return (
       <div>
         <Header />
-        {this.props.projects.map((project) => {
-          return (<ProjectSummary project={project} />);
+        {this.props.projects.map((project, i) => {
+          return (<ProjectSummary key={i} project={project} />);
         })}
         <div>
           <Alert

@@ -28,7 +28,6 @@ export const closeSignupDialog = () => {
 };
 
 export const saveProjects = (projects) => {
-  console.log('action', projects);
   return {
     type: 'SAVE_PROJECTS',
     projects,
