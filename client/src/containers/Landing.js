@@ -30,11 +30,17 @@ class Landing extends Component {
   constructor(props) {
     super(props);
     this.testDialog = this.testDialog.bind(this);
+    this.closePopups = this.closePopups.bind(this);
   }
 
   testDialog() {
     const hi = 'hi';
     console.log(hi);
+  }
+
+  closePopups() {
+    this.props.closeLoginDialog();
+    this.props.closeSignupDialog();
   }
 
   componentDidMount() {
@@ -45,17 +51,35 @@ class Landing extends Component {
     .catch((err) => { console.log(err); });
   }
 
+
+
+
+
+
   render() {
     const loginActions = [
       <RaisedButton
-        label="Okay"
+        label="Log in"
         primary
-        onTouchTap={this.testDialog}
+        onTouchTap={this.closePopups}
       />,
       <RaisedButton
         label="Cancel"
         primary
-        onTouchTap={this.testDialog}
+        onTouchTap={this.closePopups}
+      />,
+    ];
+
+    const signupActions = [
+      <RaisedButton
+        label="Sign up"
+        primary
+        onTouchTap={this.closePopups}
+      />,
+      <RaisedButton
+        label="Cancel"
+        primary
+        onTouchTap={this.closePopups}
       />,
     ];
     return (
@@ -74,8 +98,9 @@ class Landing extends Component {
           <Alert
             openLogin={this.props.user.openLogin}
             openSignup={this.props.user.openSignup}
-            handle={this.testDialog}
+            handle={this.closePopups}
             loginActions={loginActions}
+            signupActions={signupActions}
           />
         </div>
       </div>

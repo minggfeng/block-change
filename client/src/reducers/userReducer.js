@@ -1,6 +1,6 @@
 const initialState = {
   openLogin: false,
-  openSignup: false,
+  openSignup: true,
 };
 
 export default (state = initialState, action) => {
