@@ -15,7 +15,7 @@ import Alert from '../components/Alert';
 import ProjectSummary from '../components/ProjectSummary';
 import LoginPage from '../components/LoginPage';
 import SignupPage from '../components/SignupPage';
-import CreateProject from '../components/CreateProject';
+import { Link } from 'react-router-dom';
 
 // styling
 import RaisedButton from 'material-ui/RaisedButton';
@@ -24,6 +24,7 @@ import './css/Landing.css';
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
+
 
 class Landing extends Component {
   constructor(props) {
@@ -69,9 +70,12 @@ class Landing extends Component {
             openSignup={this.props.user.openSignup}
             handle={this.testDialog}
             loginActions={loginActions}
-
           />
         </div>
+
+        <li><Link to="project/1">Project</Link></li>
+        <li><Link to="createProject">Create a Project</Link></li>
+
       </div>
     );
   }
