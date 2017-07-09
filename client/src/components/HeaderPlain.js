@@ -31,7 +31,10 @@ class HeaderPlain extends Component {
     return (
       <Toolbar>
         <ToolbarGroup>
-          <ToolbarTitle onClick={e => this.changeProp('home', !this.state.home)} text="Block Change" />
+          <span style={{ marginRight: 8 }}>
+            <img src="https://gdusil.files.wordpress.com/2017/05/adel-opinion-4-blockchain-incubation-to-employment-icon.png" alt='favicon' width={35} />
+          </span>
+          <ToolbarTitle onClick={e => this.changeProp('home', !this.state.home)} text="BlockChange" />
           <FontIcon className="muidocs-icon-custom-sort" />
         </ToolbarGroup>
       </Toolbar>

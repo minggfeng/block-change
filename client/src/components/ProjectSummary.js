@@ -8,12 +8,13 @@ import { setBalance, setProjectBalance } from '../actions';
 
 const styles = {
   width: 380,
-  height: 400,
+  height: 380,
   padding: 15,
   margin: 10,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  textAlign: 'center',
 };
 
 class ProjectSummary extends Component {
@@ -53,9 +54,8 @@ class ProjectSummary extends Component {
       <div>
         <Card style={styles}>
           <h4>{title}</h4>
-          <br />
           <div style={{ margin: 20 }}>
-            <img src={image} alt={id} width={300} /> <br />
+            <img src={image} alt={id} width={300} height={200}/> <br />
           </div>
           <span style={{ margin: 20 }}>
             <RaisedButton label="Donate" primary onTouchTap={this.openDonate} />

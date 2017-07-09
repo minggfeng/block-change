@@ -6,6 +6,7 @@ import axios from 'axios';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import { toggleDonate, setProjectInFocus, setBalance, setProjectBalance } from '../actions';
 import HeaderPlain from '../components/HeaderPlain';
+import Footer from '../components/Footer';
 import Donate from '../components/Donate';
 import {
   Toolbar,
@@ -142,6 +143,7 @@ class Project extends Component {
             </CardText>
           </Card>
         </div>
+        <Footer />
       </div>
     );
   }

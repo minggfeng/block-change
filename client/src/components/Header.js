@@ -19,8 +19,10 @@ class Header extends Component {
     return (
       <Toolbar>
         <ToolbarGroup>
-          <ToolbarTitle text="Block Change" />
-          <FontIcon className="muidocs-icon-custom-sort" />
+          <span style={{ marginRight: 8 }}>
+            <img src="https://gdusil.files.wordpress.com/2017/05/adel-opinion-4-blockchain-incubation-to-employment-icon.png" alt='favicon' width={35} />
+          </span>
+          <ToolbarTitle text="BlockChange" />
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarSeparator />
