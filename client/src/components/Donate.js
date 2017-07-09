@@ -31,7 +31,7 @@ class Donate extends Component {
       amount: this.state.amount,
     };
     axios.post('/projects/sendTransaction', params)
-    .then((res) => { console.log(')))))))', res.data); })
+    .then((res) => { console.log(res.data); })
     .catch((err) => { console.log(err); });
   }
 
