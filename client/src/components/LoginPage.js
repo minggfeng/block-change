@@ -40,12 +40,6 @@ class LoginPage extends Component {
           errorText={null}
           floatingLabelText="Password"
         /><br />
-        <div className="submit-button">
-          <RaisedButton
-            label="Login"
-            secondary
-          />
-        </div>
       </div>
     );
   }

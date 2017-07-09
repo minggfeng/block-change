@@ -1,17 +1,16 @@
 import React from 'react';
+import Dialog from 'material-ui/Dialog';
 import LoginPage from './LoginPage';
 
 // styling
-import Dialog from 'material-ui/Dialog';
 import './css/Alert.css';
 
-const Alert = ({ dialogActions, handle }) => (
+const Alert = ({ signupActions ,loginActions, handle, openLogin, openSignup }) => (
   <div>
     <Dialog
       title={<LoginPage />}
-      actions={dialogActions}
-      open
-      DialogInline
+      actions={loginActions}
+      open={openLogin || openSignup}
       onRequestClose={handle}
     />
   </div>
