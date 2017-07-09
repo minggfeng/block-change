@@ -8,17 +8,6 @@ import axios from 'axios';
 class Project extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // project: {
-      //   id: 1,
-      //   creator_id: 1,
-      //   title: 'test project',
-      //   description: 'test description',
-      //   goal: 1000,
-      //   wallet_address: 'wallet address',
-      //   image: 'https://bitcoin.org/img/icons/opengraph.png'
-      // }
-    };
   }
 
   render() {
