@@ -3,11 +3,6 @@ const router = express.Router();
 const models = require('../../db/models');
 const middleware = require('../middleware');
 
-router.route('/fetch')
-.get((req, res) => {
-
-});
-
 router.route('/create')
 .post((req, res) => {
   models.Project.forge(req.body).save()
