@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
-import actions from '../actions';
+import { toggleDonate, setProjectInFocus } from '../actions';
 import Header from '../components/Header';
+import Donate from '../components/Donate';
 import axios from 'axios';
 
 class Project extends Component {
@@ -21,7 +22,11 @@ class Project extends Component {
         <p><b>Description:</b> {description}</p>
         <div>Amount Raised: {goal}</div>
         <div>Goal: {goal}</div>
-        <RaisedButton label="Donate" />
+        <RaisedButton label="Donate" onTouchTap={this.props.toggleDonate}/>
+        <Donate
+          {...this.props}
+          project={this.props.projects[this.props.index]}
+        />
       </div>
     );
   }
@@ -30,13 +35,15 @@ class Project extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    projects: state.main.projects
+    projects: state.main.projects,
+    showDonate: state.donate.showDonate,
   };
 };
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-  });
+    toggleDonate, setProjectInFocus,
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Project);
