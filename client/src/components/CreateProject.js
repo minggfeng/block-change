@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import './css/CreateProject.css';
 
 class CreateProject extends Component {
@@ -12,4 +12,4 @@ class CreateProject extends Component {
   }
 }
 
-export default CreateProject;
+export default CreateProject;*/
