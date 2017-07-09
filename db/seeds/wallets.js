@@ -17,7 +17,6 @@ exports.seed = (knex, Promise) => knex('user_wallets').del()
     const wallets = ethAddresses.userWallets.slice(1, 11);
     wallets.forEach((x, index) => {
       profiles.push({
-        id: index,
         email: `f@l${index}`,
         profile_wallet: x.wallet_address,
         password: 'p',
@@ -31,7 +30,6 @@ exports.seed = (knex, Promise) => knex('user_wallets').del()
     const wallets = ethAddresses.projectWallets.slice(0, 10);
     wallets.forEach((x, index) => {
       projectsArray.push({
-        id: index,
         profile_id: index + 1,
         title: projects[index % projects.length].title,
         description: projects[index % projects.length].description.substr(0, 255),
@@ -49,9 +47,8 @@ exports.seed = (knex, Promise) => knex('user_wallets').del()
       const project_wallet = projectsArray[i].project_wallet;
       const txhash = eth.sendTransaction(Math.random() * 90000 | 0, profile_wallet, project_wallet);
       txHashes.push({
-        id: i,
         profile_id: i + 1,
-        project_id: i,
+        project_id: i + 1,
         txhash,
       });
     }

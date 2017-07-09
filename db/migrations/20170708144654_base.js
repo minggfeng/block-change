@@ -12,7 +12,7 @@ exports.up = (knex, Promise) => Promise.all([
     table.string('title').notNullable();
     table.string('description').notNullable();
     table.integer('goal').notNullable();
-    table.string('project_wallet', 255).notNullable();
+    table.string('project_wallet').notNullable();
     table.string('image').nullable();
   }),
   knex.schema.createTableIfNotExists('donations', (table) => {
