@@ -1,6 +1,11 @@
 const initialState = {
-  openLogin: false,
+  openLogin: true,
   openSignup: false,
+  email: '',
+  wallet: '',
+  debit: 0,
+  password: '',
+  password2: '',
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +29,31 @@ export default (state = initialState, action) => {
       return Object.assign({
         ...state,
         openSignup: action.openSignup,
+      });
+    case 'UPDATE_USER_EMAIL':
+      return Object.assign({
+        ...state,
+        email: action.email,
+      });
+    case 'UPDATE_USER_WALLET':
+      return Object.assign({
+        ...state,
+        wallet: action.wallet,
+      });
+    case 'UPDATE_USER_DEBIT':
+      return Object.assign({
+        ...state,
+        debit: action.debit,
+      });
+    case 'UPDATE_USER_PASSWORD':
+      return Object.assign({
+        ...state,
+        password: action.password,
+      });
+    case 'VALIDATE_USER_PASSWORD':
+      return Object.assign({
+        ...state,
+        password2: action.password2,
       });
     default:
       return state;

@@ -30,11 +30,18 @@ class Landing extends Component {
   constructor(props) {
     super(props);
     this.testDialog = this.testDialog.bind(this);
+    this.closePopups = this.closePopups.bind(this);
+    this.validateLogin = this.validateLogin.bind(this);
   }
 
   testDialog() {
     const hi = 'hi';
     console.log(hi);
+  }
+
+  closePopups() {
+    this.props.closeLoginDialog();
+    this.props.closeSignupDialog();
   }
 
   componentDidMount() {
@@ -45,17 +52,45 @@ class Landing extends Component {
     .catch((err) => { console.log(err); });
   }
 
+  validateLogin() {
+    console.log('email: ', this.props.user.email);
+    console.log('password: ', this.props.user.password);
+    axios.post('/login', this.props.user.email, this.props.user.password)
+    .then( res => {
+      console.log(`successfully validated login info`);
+      // if valid, redirect to landing page
+      // if not valid, display error
+    })
+    .catch( err => { console.error(`failed to validate login info: ${err}`); })
+  }
+
+
+
+
   render() {
     const loginActions = [
       <RaisedButton
-        label="Okay"
+        label="Log in"
         primary
-        onTouchTap={this.testDialog}
+        onTouchTap={this.validateLogin}
       />,
       <RaisedButton
         label="Cancel"
         primary
-        onTouchTap={this.testDialog}
+        onTouchTap={this.closePopups}
+      />,
+    ];
+
+    const signupActions = [
+      <RaisedButton
+        label="Sign up"
+        primary
+        onTouchTap={this.closePopups}
+      />,
+      <RaisedButton
+        label="Cancel"
+        primary
+        onTouchTap={this.closePopups}
       />,
     ];
     return (
@@ -74,8 +109,10 @@ class Landing extends Component {
           <Alert
             openLogin={this.props.user.openLogin}
             openSignup={this.props.user.openSignup}
-            handle={this.testDialog}
+            handle={this.closePopups}
             loginActions={loginActions}
+            signupActions={signupActions}
+            validateLogin={this.validateLogin}
           />
         </div>
       </div>
