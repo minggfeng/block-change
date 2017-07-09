@@ -1,11 +1,3 @@
-// export const sampleAction = (/* input */) => {
-//   return {
-//     type: 'SAMPLE_ACTION',
-//     // input
-//   };
-// };
-
-
 // userReducerActions
 export const openLoginDialog = () => {
   return {
@@ -32,5 +24,12 @@ export const closeSignupDialog = () => {
   return {
     type: 'CLOSE_SIGNUP',
     openSignup: false,
+  };
+};
+
+export const saveProjects = (projects) => {
+  return {
+    type: 'SAVE_PROJECTS',
+    projects,
   };
 };

@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, fetch } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import axios from 'axios';
+import { saveProjects } from '../actions';
 import {
   openLoginDialog,
   openSignupDialog,
@@ -34,6 +36,14 @@ class Landing extends Component {
     console.log(hi);
   }
 
+  componentDidMount() {
+    axios.get('/fetchProjects')
+    .then((res) => {
+      this.props.saveProjects(res.data);
+    })
+    .catch((err) => { console.log(err); });
+  }
+
   render() {
     const loginActions = [
       <RaisedButton
@@ -50,12 +60,9 @@ class Landing extends Component {
     return (
       <div>
         <Header />
-        {/* {this.props.projects.map(project => {
-          return (
-            <ProjectSummary project={project} />
-          );
-        })} */}
-
+        {this.props.projects.map((project, i) => {
+          return (<ProjectSummary key={i} project={project} />);
+        })}
         <div>
           <Alert
             openLogin={this.props.user.openLogin}
@@ -73,16 +80,13 @@ class Landing extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    main: state.main,
+    projects: state.main.projects,
   };
 };
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    openLoginDialog: openLoginDialog,
-    closeLoginDialog: closeLoginDialog,
-    openSignupDialog: openSignupDialog,
-    closeSignupDialog: closeSignupDialog,
+    openLoginDialog, closeLoginDialog, openSignupDialog, closeSignupDialog, saveProjects,
   }, dispatch);
 }
 

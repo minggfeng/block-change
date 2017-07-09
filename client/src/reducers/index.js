@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux';
-// import someReducer from './someReducer';
-// import Immutable from 'seamless-immutable';
 import mainReducer from './mainReducer';
 import userReducer from './userReducer';
 
