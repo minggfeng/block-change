@@ -43,7 +43,8 @@ class SignupPage extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{ padding: 30 }}>
+        <h2>Sign Up</h2>
         <TextField
           errorText={null}
           value={this.props.user.email}

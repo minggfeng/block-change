@@ -34,8 +34,12 @@ class ProjectSummary extends Component {
         <Card style={styles}>
           <h4>{title}</h4>
           <br />
-          <img src={image} alt={id} width={300} /> <br />
-          <RaisedButton label="Donate" primary onTouchTap={this.openDonate} />
+          <div style={{ margin: 20 }}>
+            <img src={image} alt={id} width={300} /> <br />
+          </div>
+          <span style={{ margin: 20 }}>
+            <RaisedButton label="Donate" primary onTouchTap={this.openDonate} />
+          </span>
           <Link to={`/project/${this.props.index}`}>
             <RaisedButton label="Learn More" primary />
           </Link>
