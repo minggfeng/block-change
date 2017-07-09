@@ -20,7 +20,7 @@ ReactDOM.render((
         <div>
           <Route exact path="/" component={Landing} />
           <Route path="/CreateProject" component={CreateProject} />
-          <Route path="/project/:id" render={innerProps => (<Project pid={innerProps.match.params.id} />)} />
+          <Route path="/project/:index" render={innerProps => (<Project index={innerProps.match.params.index} />)} />
         </div>
       </Router>
     </Provider>

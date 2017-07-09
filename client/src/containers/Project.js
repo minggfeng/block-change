@@ -8,36 +8,19 @@ import axios from 'axios';
 class Project extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      project: {
-        id: 1,
-        creator_id: 1,
-        title: 'test project',
-        description: 'test description',
-        goal: 1000,
-        wallet_address: 'wallet address',
-        image: 'https://bitcoin.org/img/icons/opengraph.png'
-      }
-    };
-  }
-
-  componentDidMount() {
-    // axios.get('/project/fetch')
-    // .then(res => {
-
-    // })
   }
 
   render() {
+    const { id, title, description, goal, image } = this.props.projects[this.props.index];
     return (
       <div>
         <Header />
         
-        <h1>{this.state.project.title}</h1>
+        <h1>{title}</h1>
 
-        <p>{this.state.project.description}</p>
+        <p>{description}</p>
 
-        <div>Goal: {this.state.project.goal}</div>
+        <div>Goal: {goal}</div>
 
         <button>Donate</button>
 
@@ -48,7 +31,8 @@ class Project extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    sampleReducer: state.sampleReducer,
+    user: state.user,
+    projects: state.main.projects
   };
 };
 
