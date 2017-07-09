@@ -61,10 +61,7 @@ class CreateProject extends Component {
       });
     })
     .catch(err => {
-      this.props.addProjects([results.data]);
-      this.setState({
-        redirect: this.props.projects.length - 1,
-      });
+      console.warn(err);
     });
   }
 
