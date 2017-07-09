@@ -8,7 +8,7 @@
 ## Scripts
 
 ### Development Environment
-1. Run Ethereum testnet: `testrpc`
+1. Run Ethereum testnet: `npm run ethereum`
 2. Run server: `npm run start` => *http://localhost:3000*
 3. Run webpack build to generate front end: `npm run build`
 
