@@ -30,8 +30,6 @@ const accounts = [
 const newAccounts = accounts.map((obj) => {
   const balance = web3.toWei(obj.balance, 'ether');
   const secretKey = web3.sha3(obj.secretKey);
-  console.log(' secretKey: ', secretKey);
-  console.log(secretKey.length);
   return { balance, secretKey };
 });
 
