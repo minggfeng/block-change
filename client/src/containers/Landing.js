@@ -21,36 +21,27 @@ injectTapEventPlugin();
 class Landing extends Component {
   constructor(props) {
     super(props);
-    this.test = this.test.bind(this);
+    this.testDialog = this.testDialog.bind(this);
   }
 
-  test() {
-    console.log('for testing');
+  testDialog() {
+    const hi = 'hi';
+    console.log(hi);
   }
 
   render() {
-
-    const customContentStyle = {
-      width: '82%',
-      maxWidth: 'none',
-      // maxHeight: 'none',
-      height: '100%',
-      opacity: 0.85,
-    };
-
-    const actions = [
+    const dialogActions = [
       <RaisedButton
         label="Okay"
         primary
-        onTouchTap={this.test}
+        onTouchTap={this.testDialog}
       />,
       <RaisedButton
         label="Cancel"
         primary
-        onTouchTap={this.test}
-      />
+        onTouchTap={this.testDialog}
+      />,
     ];
-
     return (
       <div>
         <Header />
@@ -62,7 +53,8 @@ class Landing extends Component {
 
         <div>
           <Alert
-
+            handle={this.testDialog}
+            dialogActions={dialogActions}
           />
         </div>
       </div>

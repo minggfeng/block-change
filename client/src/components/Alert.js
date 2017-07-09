@@ -1,40 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import LoginPage from './LoginPage';
 
 // styling
 import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
 import './css/Alert.css';
 
-class Alert extends Component {
-
-  test() {
-    console.log('for testing');
-  }
-
-  render() {
-    const actions = [
-      <RaisedButton
-        label="Okay"
-        primary
-        onTouchTap={this.test}
-      />,
-      <RaisedButton
-        label="Cancel"
-        primary
-        onTouchTap={this.test}
-      />
-    ]
-    return(
-      <div>
-        <Dialog
-          title="from Alert"
-          actions={actions}
-          open={true}
-          onRequestClose={this.test}
-        />
-      </div>
-    );
-  }
-}
+const Alert = ({ dialogActions, handle }) => (
+  <div>
+    <Dialog
+      title={<LoginPage />}
+      actions={dialogActions}
+      open
+      DialogInline
+      onRequestClose={handle}
+    />
+  </div>
+);
 
 export default Alert;

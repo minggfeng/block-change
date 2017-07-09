@@ -12,6 +12,7 @@ app.use(middleware.bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '../public/dist')));
 
+
 app.get('/*', (req, res) => {
   res.status(404).send(`Resource not found '${req.params.bad}'`);
 });

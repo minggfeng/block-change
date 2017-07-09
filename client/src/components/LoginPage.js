@@ -30,16 +30,14 @@ class LoginPage extends Component {
     // }
     return (
       <div>
-        <span>from Login Page</span>
         <TextField
-          hintText="Email"
-          errorText="This field is required"
+          errorText={null}
           floatingLabelText="Email"
         /><br />
         <br />
         <TextField
-          hintText="Password"
-          errorText="This field is required"
+
+          errorText={null}
           floatingLabelText="Password"
         /><br />
         <div className="submit-button">
