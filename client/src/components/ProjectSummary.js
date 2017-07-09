@@ -5,25 +5,21 @@ import { Link } from 'react-router-dom';
 class ProjectSummary extends Component {
 
   render() {
-    if (this.props.project) {
-      const { id, title, description, image } = this.props.project;
-      return (
-        <div>
-          <Card style={styles}>
-            <Link to={`/project/${this.props.index}`}>
-              <h3>{title}</h3> <br />
-              <i>description:{description}</i> 
-            </Link>
-              <br />
-            <img src={image} alt={id} width={300} /> <br />
-            <RaisedButton label="Donate" primary={true} />
-            <RaisedButton label="Learn More" primary={true} />
-          </Card>
-        </div>
-      );
-    } else {
-      return (<div>...</div>);
-    }
+    const { id, title, description, image } = this.props.project;
+    return (
+      <div>
+        <Card style={styles}>
+          <h3>{title}</h3> <br />
+          <i>description:{description}</i>
+          <br />
+          <img src={image} alt={id} width={300} /> <br />
+          <RaisedButton label="Donate" primary />
+          <Link to={`/project/${this.props.index}`}>
+            <RaisedButton label="Learn More" primary />
+          </Link>
+        </Card>
+      </div>
+    );
   }
 }
 
@@ -31,6 +27,9 @@ const styles = {
   width: 380,
   padding: 15,
   margin: 10,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 export default ProjectSummary;

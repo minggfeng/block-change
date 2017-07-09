@@ -20,11 +20,11 @@ class Header extends Component {
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarSeparator />
+          <FlatButton label="Login" primary={true} onTouchTap={() => console.log('clicked')}/>
+          <FlatButton label="Sign Up" primary={true} onTouchTap={() => console.log('clicked')}/>
           <Link to="createProject">
             <RaisedButton label="Create Project" primary={true} />
           </Link>
-          <RaisedButton label="Donate" primary={true} onTouchTap={() => console.log('clicked')}/>
-          <FlatButton label="Login" primary={true} onTouchTap={() => console.log('clicked')}/>
         </ToolbarGroup>
       </Toolbar>
     );

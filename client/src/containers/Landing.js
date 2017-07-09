@@ -1,10 +1,10 @@
-import React, { Component, fetch } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import axios from 'axios';
-import { saveProjects } from '../actions';
 import {
+  saveProjects,
   openLoginDialog,
   openSignupDialog,
   closeLoginDialog,
@@ -63,9 +63,6 @@ class Landing extends Component {
     })
     .catch( err => { console.error(`failed to validate login info: ${err}`); })
   }
-
-
-
 
   render() {
     const loginActions = [
