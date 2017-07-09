@@ -4,6 +4,7 @@ exports.up = (knex, Promise) => Promise.all([
     table.string('email', 100).notNullable().unique();
     table.string('profile_wallet', 255).notNullable().unique();
     table.string('password').notNullable();
+    table.string('debit').notNullable();
   }),
   knex.schema.createTableIfNotExists('projects', (table) => {
     table.increments('id').unsigned().primary();

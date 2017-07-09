@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import axios from 'axios';
 import {
+  resetUser,
   saveProjects,
   openLoginDialog,
   openSignupDialog,
@@ -11,6 +12,9 @@ import {
   closeSignupDialog,
   setProjectInFocus,
   toggleDonate,
+  userLogin,
+  userLogout,
+  updateCurrentUser,
 } from '../actions';
 import Header from '../components/Header';
 import Alert from '../components/Alert';
@@ -35,6 +39,8 @@ class Landing extends Component {
     this.testDialog = this.testDialog.bind(this);
     this.closePopups = this.closePopups.bind(this);
     this.validateLogin = this.validateLogin.bind(this);
+    this.proceedSignup = this.proceedSignup.bind(this);
+    this.loginToSignup = this.loginToSignup.bind(this);
   }
 
   testDialog() {
@@ -43,8 +49,9 @@ class Landing extends Component {
   }
 
   closePopups() {
-    this.props.closeLoginDialog();
-    this.props.closeSignupDialog();
+    // this.props.closeLoginDialog();
+    // this.props.closeSignupDialog();
+    this.props.resetUser();
   }
 
   componentDidMount() {
@@ -58,21 +65,63 @@ class Landing extends Component {
   validateLogin() {
     console.log('email: ', this.props.user.email);
     console.log('password: ', this.props.user.password);
-    axios.post('/login', this.props.user.email, this.props.user.password)
+    axios.post('/user/login', { 
+      email: this.props.user.email, 
+      password: this.props.user.password 
+    })
     .then( res => {
       console.log(`successfully validated login info`);
-      // if valid, redirect to landing page
-      // if not valid, display error
+      this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.wallet, res.data.debit)
+      this.props.userLogin();
+      this.props.resetUser();
+      console.log('id: ', this.props.currentUser.currentUserId);
+      console.log('email: ', this.props.currentUser.currentUserEmail);
+      console.log('password: ', this.props.currentUser.currentUserPassword);
+      console.log('wallet: ', this.props.currentUser.currentUserWallet);
+      console.log('debit: ', this.props.currentUser.currentUserDebit);
     })
-    .catch( err => { console.error(`failed to validate login info: ${err}`); })
+    .catch( err => { 
+      console.error(`failed to validate login info: ${err}`);
+      this.props.userLogout();
+    });
+  }
+
+  proceedSignup() {
+    console.log('email: ', this.props.currentUser.email);
+    console.log('password: ', this.props.currentUser.password);
+    console.log('wallet: ', this.props.currentUser.wallet);
+    console.log('debit: ', this.props.currentUser.debit);
+    axios.post('/user/signup', { email: this.props.user.email,
+      password: this.props.user.password,
+      profile_wallet: this.props.user.wallet,
+      debit: this.props.user.debit,
+    })
+    .then( res => {
+      console.log(`successfully signed up`);
+      this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.wallet, res.data.debit)
+      this.props.userLogin();
+      this.props.resetUser();
+    });
+
+  }
+
+  loginToSignup() {
+    this.props.closeLoginDialog();
+    this.props.resetUser(),
+    setTimeout(this.props.openSignupDialog(), 400);
   }
 
   render() {
     const loginActions = [
       <RaisedButton
         label="Log in"
-        primary
+        secondary
         onTouchTap={this.validateLogin}
+      />,
+      <RaisedButton
+        label="Sign up"
+        primary
+        onTouchTap={this.loginToSignup}
       />,
       <RaisedButton
         label="Cancel"
@@ -84,8 +133,8 @@ class Landing extends Component {
     const signupActions = [
       <RaisedButton
         label="Sign up"
-        primary
-        onTouchTap={this.closePopups}
+        secondary
+        onTouchTap={this.proceedSignup}
       />,
       <RaisedButton
         label="Cancel"
@@ -95,7 +144,10 @@ class Landing extends Component {
     ];
     return (
       <div>
-        <Header />
+        <Header 
+          openLoginDialog={this.props.openLoginDialog}
+          openSignupDialog={this.props.openSignupDialog}
+        />
         <GridList
           cellHeight={400}
           cols={3}
@@ -134,6 +186,7 @@ class Landing extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    currentUser: state.profile,
     projects: state.main.projects,
     projectInFocus: state.donate.projectInFocus,
     showDonate: state.donate.showDonate,
@@ -142,7 +195,9 @@ const mapStateToProps = (state) => {
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    openLoginDialog, closeLoginDialog, openSignupDialog, closeSignupDialog, saveProjects, setProjectInFocus, toggleDonate,
+    setProjectInFocus, toggleDonate,
+    resetUser, openLoginDialog, closeLoginDialog, openSignupDialog, closeSignupDialog, saveProjects,
+    userLogin, userLogout, updateCurrentUser,
   }, dispatch);
 }
 

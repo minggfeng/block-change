@@ -5,12 +5,9 @@ import {
   updateUserEmail,
   updateUserPassword,
 } from '../actions';
-// import { Redirect, Link } from 'react-router-dom';
-// import axios from 'axios';
 
 // styling
 import TextField from 'material-ui/TextField';
-// import RaisedButton from 'material-ui/RaisedButton';
 import './css/LoginPage.css';
 
 class LoginPage extends Component {
@@ -29,9 +26,6 @@ class LoginPage extends Component {
   }
 
   render() {
-    // if (login) {
-    //   return <Redirect push to ="/" />;
-    // }
     return (
       <div>
         <TextField
