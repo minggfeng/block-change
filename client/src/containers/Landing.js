@@ -15,7 +15,6 @@ import Alert from '../components/Alert';
 import ProjectSummary from '../components/ProjectSummary';
 import LoginPage from '../components/LoginPage';
 import SignupPage from '../components/SignupPage';
-import CreateProject from '../components/CreateProject';
 import { Link } from 'react-router-dom';
 
 // styling
@@ -71,7 +70,6 @@ class Landing extends Component {
             openSignup={this.props.user.openSignup}
             handle={this.testDialog}
             loginActions={loginActions}
-
           />
         </div>
 

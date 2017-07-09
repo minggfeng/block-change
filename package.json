@@ -12,6 +12,8 @@
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "bookshelf": "^0.10.3",
+    "config": "^1.26.1",
+    "css-loader": "^0.28.4",
     "ethereumjs-testrpc": "^4.0.1",
     "express": "^4.15.3",
     "knex": "^0.13.0",

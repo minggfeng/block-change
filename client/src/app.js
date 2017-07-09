@@ -23,6 +23,6 @@ ReactDOM.render((
           <Route path="/project/:id" render={innerProps => (<Project pid={innerProps.match.params.id} />)} />
         </div>
       </Router>
-    </Provider>)
-  </MuiThemeProvider>,
+    </Provider>
+  </MuiThemeProvider>),
   document.getElementById('app'));

@@ -1,7 +1,7 @@
 const db = require('../');
 
 const Project = db.Model.extend({
-  tablename: 'projects',
+  tableName: 'projects',
   donations: function() {
     return this.hasMany('Donation');
   }

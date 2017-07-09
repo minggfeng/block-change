@@ -5,6 +5,12 @@ import actions from '../actions';
 import Header from '../components/Header';
 import axios from 'axios';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import Alert from '../components/Alert';
+
+const style = {
+  margin: 12,
+};
 
 class CreateProject extends Component {
   constructor(props) {
@@ -14,8 +20,10 @@ class CreateProject extends Component {
         title: '',
         description: '',
         goal: '',
-        wallet_address: '',
-        image: ''
+        project_wallet: '',
+        image: '',
+        alert: false,
+        alertMessage: ''
       }
     };
 
@@ -31,25 +39,51 @@ class CreateProject extends Component {
 
   createProject(event) {
     event.preventDefault();
-  }
 
+    let options = {
+      profile_id: 1,
+      title: this.state.title,
+      description: this.state.description,
+      goal: this.state.goal,
+      project_wallet: this.state.project_wallet,
+      image: this.state.image
+    };
 
-  componentDidMount() {
-    // axios.post('/project/create')
-    // .then(res => {
+    axios.post('/projects/create', options)
+    .then(results => {
+      this.setState({
+        alertTitle: 'Project Created'
+      });
+    })
+    .catch(err => {
+      this.setState({
+        alertTitle: 'Error in creating project. Please try again.'
+      });
+    });
 
-    // })
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.createProject}>
-          <TextField hintText="Title" onChange={e => this.changeProp('title', e.target.value)} />
-          <TextField hintText="Description" multiLine={true} onChange={e => this.changeProp('description', e.target.value)} />
-          <TextField hintText="Goal" onChange={e => this.changeProp('goal', e.target.value)} />
-          <TextField hintText="Wallet Address" onChange={e => this.changeProp('wallet_address', e.target.value)} />
-        </form>
+        {
+          this.state.alert && 
+          <Alert title={this.state.alertTitle} open={this.state.alert} />
+        }
+        <Header />
+          <div>
+            <TextField floatingLabelText="Title" onChange={e => this.changeProp('title', e.target.value)} />
+          </div>
+          <div>
+            <TextField floatingLabelText="Description" multiLine={true} rows={5} rowsMax={5} onChange={e => this.changeProp('description', e.target.value)} />
+          </div>
+          <div>
+            <TextField floatingLabelText="Goal" type="number" onChange={e => this.changeProp('goal', e.target.value)} />
+          </div>
+          <div>
+            <TextField floatingLabelText="Wallet Address" onChange={e => this.changeProp('project_wallet', e.target.value)} />
+          </div>
+          <RaisedButton onTouchTap={e => {this.createProject(e)}} label="Create Project" primary={true} style={style} />
       </div>
     );
   }
