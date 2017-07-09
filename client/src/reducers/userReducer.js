@@ -12,9 +12,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'RESET_USER': 
-      return Object.assign({
-        openLogin: false,
-        openSignup: false,       
+      return Object.assign({  
+        ...state,   
         email: '',
         wallet: '',
         debit: '',

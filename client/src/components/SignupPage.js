@@ -17,7 +17,6 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    // this.handleWalletChange = this.handleWalletChange.bind(this);
     this.handleDebitChange = this.handleDebitChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handlePassword2Change = this.handlePassword2Change.bind(this);
@@ -26,10 +25,6 @@ class SignupPage extends Component {
   handleEmailChange(e) {
     this.props.updateUserEmail(e.target.value);
   }
-
-  // handleWalletChange(e) {
-  //   this.props.updateUserWallet(e.target.value);
-  // }
 
   handleDebitChange(e) {
     this.props.updateUserDebit(e.target.value);
@@ -51,12 +46,6 @@ class SignupPage extends Component {
           floatingLabelText="Email"
           onChange={this.handleEmailChange}
         /><br />
-        {/*<TextField
-          errorText={null}
-          value={this.props.user.wallet}
-          floatingLabelText="Wallet String"
-          onChange={this.handleWalletChange}
-        /><br />*/}
         <TextField
           errorText={null}
           value={this.props.user.debit}

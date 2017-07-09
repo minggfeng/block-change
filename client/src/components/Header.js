@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import renderif from 'render-if';
 import { Link, Redirect } from 'react-router-dom';
 import {
   Toolbar,
@@ -23,11 +24,21 @@ class Header extends Component {
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarSeparator />
-          <FlatButton label="Login" primary={true} onTouchTap={this.props.openLoginDialog}/>
-          <FlatButton label="Sign Up" primary={true} onTouchTap={this.props.openSignupDialog}/>
-          <Link to="createProject">
-            <RaisedButton label="Create Project" primary={true} />
-          </Link>
+          {renderif(this.props.loggedin === false) (
+            <FlatButton label="Login" primary={true} onTouchTap={this.props.openLoginDialog}/>
+          )}
+          {renderif(this.props.loggedin === false) (
+            <FlatButton label="Sign Up" primary={true} onTouchTap={this.props.openSignupDialog}/>
+          )}
+
+          {renderif(this.props.loggedin === true) (
+            <Link to="createProject">
+              <RaisedButton label="Create Project" primary={true} onTouchTap={this.props.loggedin === false ? this.props.openLoginDialog : this.props.goToCreateProjectPage}/>
+            </Link>
+          )}
+          {renderif(this.props.loggedin === false) (
+            <RaisedButton label="Create Project" primary={true} onTouchTap={this.props.loggedin === false ? this.props.openLoginDialog : this.props.goToCreateProjectPage}/>
+          )}
         </ToolbarGroup>
       </Toolbar>
     );
