@@ -25,14 +25,18 @@ class Donate extends Component {
   }
 
   sendDonation() {
-    const params = {
-      fromAddress: this.props.userWallet,
-      toAddress: this.props.project.project_wallet,
-      amount: this.state.amount,
-    };
-    axios.post('/projects/sendTransaction', params)
-    .then((res) => { console.log(res.data); })
-    .catch((err) => { console.log(err); });
+    if (this.props.balance < this.state.amount) {
+      alert('Donation exceeds balance.');
+    } else {
+      const params = {
+        fromAddress: this.props.userWallet,
+        toAddress: this.props.project.project_wallet,
+        amount: this.state.amount,
+      };
+      axios.post('/projects/sendTransaction', params)
+      .then((res) => { console.log(res.data); })
+      .catch((err) => { console.log(err); });
+    }
   }
 
   render() {
