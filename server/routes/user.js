@@ -5,11 +5,11 @@ const models = require('../../db/models');
 
 router.route('/login')
 .post((req, res) => {
-  models.User.where({email: req.body.email}).fetch()
-  .then(user => {
+  models.User.where({ email: req.body.email }).fetch()
+  .then((user) => {
     res.status(201).send(user.serialize());
   })
-  .catch(err => {
+  .catch((err) => {
     res.status(500).send(err);
   });
 });
@@ -19,14 +19,14 @@ router.route('/signup')
   console.log('req.body: ', req.body);
   models.User.forge(req.body).save()
   .then((user) => {
-    models.Wallets.where({profile_id: -1}).fetch()
-    .then(wallet => {
+    models.Wallets.where({ profile_id: -1 }).fetch()
+    .then((wallet) => {
       user.attributes.profile_wallet = wallet.attributes.wallet_address;
-      user.set({profile_wallet: wallet.attributes.wallet_address }).save();
-      wallet.set({profile_id: user.attributes.id}).save();
+      user.set({ profile_wallet: wallet.attributes.wallet_address }).save();
+      wallet.set({ profile_id: user.attributes.id }).save();
       res.status(201).send(user.serialize());
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
   })
