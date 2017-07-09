@@ -65,26 +65,39 @@ class Landing extends Component {
   validateLogin() {
     // console.log('email: ', this.props.user.email);
     // console.log('password: ', this.props.user.password);
-    axios.post('/user/login', { 
-      email: this.props.user.email, 
-      password: this.props.user.password 
-    })
-    .then( res => {
-      console.log(`successfully validated login info`);
-      // console.log('res: ', res);
-      this.props.updateCurrentUser(res.data.id, res.data.password, res.data.email, res.data.profile_wallet, res.data.debit)
-      this.props.userLogin();
-      this.props.resetUser();
-      console.log('id: ', this.props.currentUser.currentUserId);
-      console.log('email: ', this.props.currentUser.currentUserEmail);
-      console.log('password: ', this.props.currentUser.currentUserPassword);
-      console.log('wallet: ', this.props.currentUser.currentUserWallet);
-      console.log('debit: ', this.props.currentUser.currentUserDebit);
-    })
-    .catch( err => {
-      console.error(`failed to validate login info: ${err}`);
-      this.props.userLogout();
-    });
+
+    const options = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: this.props.user.email,
+        password: this.props.user.password,
+      }),
+    };
+
+    fetch('/user/login', options)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        console.log(`successfully validated login info`);
+        // console.log('res: ', res);
+        this.props.updateCurrentUser(res.id, res.password,
+          res.email, res.profile_wallet, res.debit);
+        this.props.userLogin();
+        this.props.resetUser();
+        console.log('id: ', this.props.currentUser.currentUserId);
+        console.log('email: ', this.props.currentUser.currentUserEmail);
+        console.log('password: ', this.props.currentUser.currentUserPassword);
+        console.log('wallet: ', this.props.currentUser.currentUserWallet);
+        console.log('debit: ', this.props.currentUser.currentUserDebit);
+      })
+      .catch(err => {
+        console.error(`failed to validate login info: ${err}`);
+        this.props.userLogout();
+      });
   }
 
   proceedSignup() {

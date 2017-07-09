@@ -15,6 +15,8 @@ import {
   RaisedButton,
   LinearProgress } from 'material-ui';
 
+import './css/Project.css';
+
 const style = {
   margin: 12,
 };
@@ -23,9 +25,11 @@ class Project extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      home: false
-    }
+      home: false,
+      donations: [],
+    };
     this.changeProp = this.changeProp.bind(this);
+    this.getDonations = this.getDonations.bind(this);
   }
 
   changeProp(key, val) {
@@ -34,6 +38,35 @@ class Project extends Component {
     });
   }
 
+  getDonations(id) {
+    const options = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        project_id: id,
+      }),
+    };
+
+    fetch('/projects/getDonations', options)
+      .then(res => res.json())
+      .then((res) => {
+        console.log(res);
+        this.setState({ donations: res });
+      })
+      .catch((err) => {
+        console.error(`failed to get donations: ${err}`);
+      });
+  }
+
+
+  componentDidMount() {
+    const { id } = this.props.projects[this.props.index];
+    this.getDonations(id);
+  }
+  
   render() {
     const { id, title, description, goal, image, project_wallet } = this.props.projects[this.props.index];
     if (this.state.home) {
@@ -70,6 +103,20 @@ class Project extends Component {
               {...this.props}
               project={this.props.projects[this.props.index]}
             />
+            <table className="tx-table">
+              <thead>
+                <tr>
+                  <td className="tx-header">Donations</td>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.donations.map((x) => (
+                  <tr>
+                    <td className="tx-td">{x}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Card>
         </div>
       </div>
@@ -89,6 +136,6 @@ const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
     toggleDonate, setProjectInFocus,
   }, dispatch);
-}
+};
 
 export default connect(mapStateToProps, matchDispatchToProps)(Project);
