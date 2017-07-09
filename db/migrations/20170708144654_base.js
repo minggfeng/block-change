@@ -27,3 +27,4 @@ exports.down = (knex, Promise) => Promise.all([
   knex.schema.dropTable('projects'),
   knex.schema.dropTable('profiles')
 ]);
+
