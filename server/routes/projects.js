@@ -86,7 +86,7 @@ router.route('/getDonations')
     // res.status(201).send(project.serialize().map(x => x.txhash));
   })
   .then(mapped => {
-    console.log(mapped)
+    console.log('mapped', mapped)
   })
   .catch((err) => {
     res.status(500).send(err);
