@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -15,6 +14,7 @@ import {
   FlatButton,
   RaisedButton,
   LinearProgress } from 'material-ui';
+import Transaction from '../components/Transaction';
 
 import './css/Project.css';
 
@@ -40,26 +40,43 @@ class Project extends Component {
   }
 
   getDonations(id) {
-    const options = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        project_id: id,
-      }),
-    };
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     project_id: id,
+    //   }),
+    // };
 
-    fetch('/projects/getDonations', options)
-      .then(res => res.json())
-      .then((res) => {
-        console.log(res);
-        this.setState({ donations: res });
-      })
-      .catch((err) => {
-        console.error(`failed to get donations: ${err}`);
-      });
+    // fetch('/projects/getDonations', options)
+    //   .then(res => res.json())
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.setState({ donations: res });
+    //   })
+    //   .catch((err) => {
+    //     console.error(`failed to get donations: ${err}`);
+    //   });
+    this.setState({
+      donations: [
+      {
+        txhash: "0x37e79336470fd033075078e75a29002a97da483f671d2db1a9d35220b4c91c0d",
+        blockHeight: "1262142 (5292 block confirmations)",
+        from: "0xfb66419fa21f0adc5a2e477bea235d1059b19e7e",
+        to: "0x6d99b71fb15b270fd00ae09a7218c4cab1695041",
+        value: "49 Ether ($0.00)"
+      }, 
+      {
+        txhash: "0x37e79336470fd033075078e75a29002a97da483f671d2db1a9d35220b4c91c0d",
+        blockHeight: "1262142 (5292 block confirmations)",
+        from: "0xfb66419fa21f0adc5a2e477bea235d1059b19e7e",
+        to: "0x6d99b71fb15b270fd00ae09a7218c4cab1695041",
+        value: "49 Ether ($0.00)"
+      }]
+    })
   }
 
 
@@ -89,7 +106,7 @@ class Project extends Component {
             <div style={{ padding: "10px" }}>
               Amount Raised: 5000
             </div>
-            <div>
+            <div style={{ padding: "10px" }}>
               Wallet address: {project_wallet}
             </div>
             <div style={{ padding: "10px" }}>
@@ -98,26 +115,21 @@ class Project extends Component {
 
             <CardText>{description}</CardText>
 
-            <RaisedButton primary={true} style={style} label="Donate" onTouchTap={this.props.toggleDonate}/>
+            <CardActions>
+              <RaisedButton primary={true} style={style} label="Donate" onTouchTap={this.props.toggleDonate}/>
+              <Donate
+                {...this.props}
+                project={this.props.projects[this.props.index]}
+              />
+            </CardActions>
 
-            <Donate
-              {...this.props}
-              project={this.props.projects[this.props.index]}
-            />
-            <table className="tx-table">
-              <thead>
-                <tr>
-                  <td className="tx-header">Donations</td>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.donations.map((x) => (
-                  <tr>
-                    <td className="tx-td">{x}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <CardTitle subtitle="Transaction History" actAsExpander={true} showExpandableButton={true}/>
+
+            <CardText expandable={true}>
+            {
+              this.state.donations.map((transaction, index) => <Transaction key={index} transaction={transaction} /> )
+            }
+            </CardText>
           </Card>
         </div>
       </div>
