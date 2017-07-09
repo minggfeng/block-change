@@ -27,7 +27,8 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ padding: 30 }}>
+        <h2>Login</h2>
         <TextField
           errorText={null}
           floatingLabelText="Email"

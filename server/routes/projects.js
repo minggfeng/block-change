@@ -48,6 +48,7 @@ router.route('/getBalance/:address')
 router.route('/sendTransaction')
 .post((req, res) => {
   return new Promise((resolve, reject) => {
+    console.log(req.body, 'req.body');
     const { amount, fromAddress, toAddress } = req.body;
     resolve(helpers.sendTransaction(amount, fromAddress, toAddress));
   })
