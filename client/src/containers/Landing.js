@@ -201,7 +201,9 @@ class Landing extends Component {
             balance={this.props.balance}
           />
         </div>
-        <Footer />
+        <div style={{ marginTop: 20, color: '#aaa', fontFamily: 'Roboto', textAlign: 'center' }}>
+          <Footer />
+        </div>
       </div>
     );
   }
