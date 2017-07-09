@@ -69,16 +69,6 @@ class ProjectSummary extends Component {
   }
 }
 
-const styles = {
-  width: 380,
-  height: 400,
-  padding: 15,
-  margin: 10,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
-
 const mapStateToProps = (state) => {
   return {
     balance: state.donate.balance,
