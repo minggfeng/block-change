@@ -13,5 +13,5 @@ exports.up = (knex, Promise) => Promise.all([
 
 exports.down = (knex, Promise) => Promise.all([
   knex.schema.dropTable('project_wallets'),
-  knex.schema.dropTable('profile_wallets'),
+  knex.schema.dropTable('user_wallets'),
 ]);

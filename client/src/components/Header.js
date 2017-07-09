@@ -10,7 +10,6 @@ import {
   FontIcon } from 'material-ui';
 
 class Header extends Component {
-
   render() {
     return (
       <Toolbar>
@@ -20,8 +19,8 @@ class Header extends Component {
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarSeparator />
-          <FlatButton label="Login" primary={true} onTouchTap={() => console.log('clicked')}/>
-          <FlatButton label="Sign Up" primary={true} onTouchTap={() => console.log('clicked')}/>
+          <FlatButton label="Login" primary={true} onTouchTap={this.props.openLoginDialog}/>
+          <FlatButton label="Sign Up" primary={true} onTouchTap={this.props.openSignupDialog}/>
           <Link to="createProject">
             <RaisedButton label="Create Project" primary={true} />
           </Link>

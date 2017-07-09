@@ -26,7 +26,7 @@ app.get('/fetchProjects', (req, res) => {
 });
 
 app.use('/projects', routes.projects);
-
+app.use('/user', routes.user);
 
 app.get('/*', (req, res) => {
   res.status(404).send(`Resource not found '${req.params.bad}'`);

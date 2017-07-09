@@ -1,15 +1,26 @@
 const initialState = {
-  openLogin: true,
+  openLogin: false,
   openSignup: false,
   email: '',
   wallet: '',
-  debit: 0,
+  debit: '',
   password: '',
   password2: '',
+  loggedin: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'RESET_USER': 
+      return Object.assign({
+        openLogin: false,
+        openSignup: false,       
+        email: '',
+        wallet: '',
+        debit: '',
+        password: '',
+        password2: '',
+      });
     case 'OPEN_LOGIN':
       return Object.assign({
         ...state,
@@ -54,6 +65,16 @@ export default (state = initialState, action) => {
       return Object.assign({
         ...state,
         password2: action.password2,
+      });
+    case 'USER_LOGIN':
+      return Object.assign({
+        ...state,
+        loggedin: action.loggedin,
+      });
+    case 'USER_LOGOUT':
+      return Object.assign({
+        ...state,
+        loggedin: action.loggedin,
       });
     default:
       return state;

@@ -1,4 +1,10 @@
 // userReducerActions
+export const resetUser = () => {
+  return {
+    type: 'RESET_USER',
+  };
+};
+
 export const openLoginDialog = () => {
   return {
     type: 'OPEN_LOGIN',
@@ -79,5 +85,31 @@ export const setProjectInFocus = (projectInFocus) => {
   return {
     type: 'SET_PROJECT_IN_FOCUS',
     projectInFocus,
+  };
+};
+
+export const userLogin = () => {
+  return {
+    type: 'USER_LOGIN',
+    loggedin: true,
+  };
+};
+
+export const userLogout = () => {
+  return {
+    type: 'USER_LOGOUT',
+    loggedin: false,
+  };
+};
+
+// currentUser actions
+export const updateCurrentUser = (userId, password, email, wallet, debit) => {
+  return {
+    type: 'UPDATE_CURRENT_USER',
+    userId, 
+    password,
+    email,
+    wallet,
+    debit,
   };
 };
