@@ -33,11 +33,11 @@ const projectKeys = [];
 
 for (let i = 0; i < 100; i += 1) {
   userWallets.push({
-    profile_id: -1,
+    profile_id: (i > 0 && i < 11) ? i : -1,
     wallet_address: privateKeyToAddress(web3.sha3(`userPrivateKey${i}`).substr(2, 64)),
   });
   projectWallets.push({
-    project_id: -1,
+    project_id: (i >= 0 && i < 10) ? i : -1,
     wallet_address: privateKeyToAddress(web3.sha3(`projectPrivateKey${i}`).substr(2, 64)),
   });
   userKeys.push({
