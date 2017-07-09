@@ -25,8 +25,12 @@ class ProjectSummary extends Component {
           <h4>{title}</h4>
           <i>wallet address:{project_wallet}</i>
           <br />
-          <img src={image} alt={id} width={300} /> <br />
-          <RaisedButton label="Donate" primary onTouchTap={this.openDonate} />
+          <div style={{ margin: 20 }}>
+            <img src={image} alt={id} width={300} /> <br />
+          </div>
+          <span style={{ margin: 20 }}>
+            <RaisedButton label="Donate" primary onTouchTap={this.openDonate} />
+          </span>
           <Link to={`/project/${this.props.index}`}>
             <RaisedButton label="Learn More" primary />
           </Link>
