@@ -31,6 +31,7 @@ class Landing extends Component {
     super(props);
     this.testDialog = this.testDialog.bind(this);
     this.closePopups = this.closePopups.bind(this);
+    this.validateLogin = this.validateLogin.bind(this);
   }
 
   testDialog() {
@@ -51,7 +52,17 @@ class Landing extends Component {
     .catch((err) => { console.log(err); });
   }
 
-
+  validateLogin() {
+    console.log('email: ', this.props.user.email);
+    console.log('password: ', this.props.user.password);
+    axios.post('/login', this.props.user.email, this.props.user.password)
+    .then( res => {
+      console.log(`successfully validated login info`);
+      // if valid, redirect to landing page
+      // if not valid, display error
+    })
+    .catch( err => { console.error(`failed to validate login info: ${err}`); })
+  }
 
 
 
@@ -61,7 +72,7 @@ class Landing extends Component {
       <RaisedButton
         label="Log in"
         primary
-        onTouchTap={this.closePopups}
+        onTouchTap={this.validateLogin}
       />,
       <RaisedButton
         label="Cancel"
@@ -101,6 +112,7 @@ class Landing extends Component {
             handle={this.closePopups}
             loginActions={loginActions}
             signupActions={signupActions}
+            validateLogin={this.validateLogin}
           />
         </div>
       </div>

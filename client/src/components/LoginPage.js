@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  updateUserEmail,
+  updateUserPassword,
+} from '../actions';
 // import { Redirect, Link } from 'react-router-dom';
 // import axios from 'axios';
 
@@ -10,24 +16,16 @@ import './css/LoginPage.css';
 class LoginPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      password: '',
-    };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
   handleEmailChange(e) {
-    this.setState({
-      email: e.target.value,
-    });
+    this.props.updateUserEmail(e.target.value);
   }
 
   handlePasswordChange(e) {
-    this.setState({
-      password: e.target.value,
-    });
+    this.props.updateUserPassword(e.target.value);
   }
 
   render() {
@@ -39,14 +37,15 @@ class LoginPage extends Component {
         <TextField
           errorText={null}
           floatingLabelText="Email"
-          value={this.state.email}
+          value={this.props.user.email}
           onChange={this.handleEmailChange}
         /><br />
         <br />
         <TextField
           errorText={null}
           floatingLabelText="Password"
-          value={this.state.password}
+          type="password"
+          value={this.props.user.password}
           onChange={this.handlePasswordChange}
         /><br />
       </div>
@@ -54,4 +53,17 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const matchDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    updateUserEmail,
+    updateUserPassword,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(LoginPage);
