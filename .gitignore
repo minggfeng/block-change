@@ -2,6 +2,7 @@
 node_modules/
 public/dist
 package-lock.json
+ethereum/db
 
 .DS_Store
 
