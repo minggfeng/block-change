@@ -1,5 +1,5 @@
 const initialState = {
-  openLogin: true,
+  openLogin: false,
   openSignup: false,
   email: '',
   wallet: '',
