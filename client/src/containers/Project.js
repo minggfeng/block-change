@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { RaisedButton } from 'material-ui';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import { toggleDonate, setProjectInFocus } from '../actions';
 import HeaderPlain from '../components/HeaderPlain';
 import Donate from '../components/Donate';
-import axios from 'axios';
-import LinearProgress from 'material-ui/LinearProgress';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {
   Toolbar,
   ToolbarGroup,
   ToolbarTitle,
-  FlatButton } from 'material-ui';
-import { Redirect } from 'react-router-dom';
+  FlatButton,
+  RaisedButton,
+  LinearProgress } from 'material-ui';
 
 const style = {
   margin: 12,
@@ -55,7 +55,7 @@ class Project extends Component {
             <div style={{ padding: "10px" }}>
               Amount Raised: 5000
             </div>
-            <div style={{ padding: "10px" }}>  
+            <div style={{ padding: "10px" }}>
               <LinearProgress mode="determinate" value={(5000/goal) * 100} />
             </div>
 
