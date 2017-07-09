@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Card, RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { setBalance } from '../actions';
+import { setBalance, setProjectBalance } from '../actions';
 
 const styles = {
   width: 380,
@@ -23,6 +23,16 @@ class ProjectSummary extends Component {
       donations: [],
     };
     this.openDonate = this.openDonate.bind(this);
+    this.updateProjectBalance = this.updateProjectBalance.bind(this);
+  }
+
+  updateProjectBalance() {
+    console.log(this.props.project.project_wallet);
+    axios.get('/projects/getBalance/' + this.props.project.project_wallet)
+    .then((res) => {
+      this.props.setProjectBalance(res.data.balance);
+    })
+    .catch((err) => { console.log(err); });
   }
 
   openDonate() {
@@ -51,7 +61,7 @@ class ProjectSummary extends Component {
             <RaisedButton label="Donate" primary onTouchTap={this.openDonate} />
           </span>
           <Link to={`/project/${this.props.index}`}>
-            <RaisedButton label="Learn More" primary />
+            <RaisedButton label="Learn More" primary onTouchTap={this.updateProjectBalance}/>
           </Link>
         </Card>
       </div>
@@ -77,7 +87,7 @@ const mapStateToProps = (state) => {
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    setBalance,
+    setBalance, setProjectBalance,
   }, dispatch);
 };
 

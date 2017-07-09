@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import { toggleDonate, setProjectInFocus } from '../actions';
+import { toggleDonate, setProjectInFocus, setBalance, setProjectBalance } from '../actions';
 import HeaderPlain from '../components/HeaderPlain';
 import Donate from '../components/Donate';
 import {
@@ -31,6 +31,16 @@ class Project extends Component {
     };
     this.changeProp = this.changeProp.bind(this);
     this.getDonations = this.getDonations.bind(this);
+    this.openDonate = this.openDonate.bind(this);
+  }
+
+  openDonate() {
+    this.props.toggleDonate();
+    axios.get('/projects/getBalance/' + this.props.projects[this.props.index].project_wallet)
+    .then((res) => {
+      this.props.setBalance(res.data.balance);
+    })
+    .catch((err) => { console.log(err); });
   }
 
   changeProp(key, val) {
@@ -68,7 +78,7 @@ class Project extends Component {
         from: "0xfb66419fa21f0adc5a2e477bea235d1059b19e7e",
         to: "0x6d99b71fb15b270fd00ae09a7218c4cab1695041",
         value: "49 Ether ($0.00)"
-      }, 
+      },
       {
         txhash: "0x37e79336470fd033075078e75a29002a97da483f671d2db1a9d35220b4c91c0d",
         blockHeight: "1262142 (5292 block confirmations)",
@@ -104,7 +114,7 @@ class Project extends Component {
               Goal: {goal}
             </div>
             <div style={{ padding: "10px" }}>
-              Amount Raised: 5000
+              Amount Raised: {this.props.projectBalance}
             </div>
             <div style={{ padding: "10px" }}>
               Wallet address: {project_wallet}
@@ -144,12 +154,14 @@ const mapStateToProps = (state) => {
     showDonate: state.donate.showDonate,
     profile: state.profile,
     userWallet: state.profile.currentUserWallet,
+    balance: state.donate.balance,
+    projectBalance: state.donate.projectBalance,
   };
 };
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    toggleDonate, setProjectInFocus,
+    toggleDonate, setProjectInFocus, setBalance, setProjectBalance,
   }, dispatch);
 };
 

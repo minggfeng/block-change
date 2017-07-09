@@ -27,13 +27,12 @@ class Donate extends Component {
   sendDonation() {
     const params = {
       fromAddress: this.props.userWallet,
-      //toAddress: this.props.project.,
+      toAddress: this.props.project.project_wallet,
       amount: this.state.amount,
     };
     axios.post('/projects/sendTransaction', params)
-    .catch((err) => { console.log(err); })
-
-    console.log('sending donation');
+    .then((res) => { console.log(')))))))', res.data); })
+    .catch((err) => { console.log(err); });
   }
 
   render() {
