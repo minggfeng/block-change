@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Toolbar,
   ToolbarGroup,
@@ -19,7 +20,9 @@ class Header extends Component {
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarSeparator />
-          <RaisedButton label="Create Project" primary={true} onTouchTap={() => console.log('clicked')}/>
+          <Link to="createProject">
+            <RaisedButton label="Create Project" primary={true} />
+          </Link>
           <RaisedButton label="Donate" primary={true} onTouchTap={() => console.log('clicked')}/>
           <FlatButton label="Login" primary={true} onTouchTap={() => console.log('clicked')}/>
         </ToolbarGroup>
