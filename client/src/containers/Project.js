@@ -50,43 +50,43 @@ class Project extends Component {
   }
 
   getDonations(id) {
-    // const options = {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     project_id: id,
-    //   }),
-    // };
-
-    // fetch('/projects/getDonations', options)
-    //   .then(res => res.json())
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.setState({ donations: res });
-    //   })
-    //   .catch((err) => {
-    //     console.error(`failed to get donations: ${err}`);
-    //   });
-    this.setState({
-      donations: [
-      {
-        txhash: "0x37e79336470fd033075078e75a29002a97da483f671d2db1a9d35220b4c91c0d",
-        blockHeight: "1262142 (5292 block confirmations)",
-        from: "0xfb66419fa21f0adc5a2e477bea235d1059b19e7e",
-        to: "0x6d99b71fb15b270fd00ae09a7218c4cab1695041",
-        value: "49 Ether ($0.00)"
+    const options = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      {
-        txhash: "0x37e79336470fd033075078e75a29002a97da483f671d2db1a9d35220b4c91c0d",
-        blockHeight: "1262142 (5292 block confirmations)",
-        from: "0xfb66419fa21f0adc5a2e477bea235d1059b19e7e",
-        to: "0x6d99b71fb15b270fd00ae09a7218c4cab1695041",
-        value: "49 Ether ($0.00)"
-      }]
-    })
+      body: JSON.stringify({
+        project_id: id,
+      }),
+    };
+
+    fetch('/projects/getTxDonations', options)
+      .then(res => res.json())
+      .then((res) => {
+        console.log(res);
+        this.setState({ donations: res });
+      })
+      .catch((err) => {
+        console.error(`failed to get donations: ${err}`);
+      });
+    // this.setState({
+    //   donations: [
+    //   {
+    //     txhash: "0x37e79336470fd033075078e75a29002a97da483f671d2db1a9d35220b4c91c0d",
+    //     blockHeight: "1262142 (5292 block confirmations)",
+    //     from: "0xfb66419fa21f0adc5a2e477bea235d1059b19e7e",
+    //     to: "0x6d99b71fb15b270fd00ae09a7218c4cab1695041",
+    //     value: "49 Ether ($0.00)"
+    //   },
+    //   {
+    //     txhash: "0x37e79336470fd033075078e75a29002a97da483f671d2db1a9d35220b4c91c0d",
+    //     blockHeight: "1262142 (5292 block confirmations)",
+    //     from: "0xfb66419fa21f0adc5a2e477bea235d1059b19e7e",
+    //     to: "0x6d99b71fb15b270fd00ae09a7218c4cab1695041",
+    //     value: "49 Ether ($0.00)"
+    //   }]
+    // })
   }
 
 
@@ -120,7 +120,7 @@ class Project extends Component {
               Wallet address: {project_wallet}
             </div>
             <div style={{ padding: "10px" }}>
-              <LinearProgress mode="determinate" value={(5000/goal) * 100} />
+              <LinearProgress mode="determinate" value={(this.props.projectBalance/goal) * 100} />
             </div>
 
             <CardText>{description}</CardText>
