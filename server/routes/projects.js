@@ -74,7 +74,19 @@ router.route('/getDonations')
 .post((req, res) => {
   models.Donation.where({ project_id: req.body.project_id }).fetchAll()
   .then((project) => {
-    res.status(201).send(project.serialize().map(x => x.txhash));
+    return Promise.map(project.serialize(), x => {
+      return new Promise((resolve, reject) => {
+        resolve(helpers.getTransaction(x.txhash));
+      })
+      .then(transaction => {
+
+        console.log('transcation', transaction)
+      })
+    })
+    // res.status(201).send(project.serialize().map(x => x.txhash));
+  })
+  .then(mapped => {
+    console.log(mapped)
   })
   .catch((err) => {
     res.status(500).send(err);
